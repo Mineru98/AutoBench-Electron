@@ -1,0 +1,19 @@
+{
+  "name": "AutoBench-Electron",
+  "version": "0.0.1",
+  "description": "AutoBench Client Application",
+  "main": "main.js",
+  "repository": "https://github.com/Mineru98/AutoBench-Electron",
+  "author": "Mineru98 <rmstjr1030@naver.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "babel-node --presets env main.js"
+  },
+  "dependencies": {
+    "ms-wmic": "^1.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
