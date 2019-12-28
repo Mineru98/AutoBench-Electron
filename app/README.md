@@ -1,68 +1,63 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to Deploy [this](https://www.christianengvall.se/electron-packager-tutorial/)
+```
+# Linux
+electron-packager . app --overwrite --platform=linux --arch=x64 --icon={icon path .png} --prune=true --out=release-builds --electron-version={build electron version}
 
-## Available Scripts
+# Windows
+electron-packager . {project folder} --overwrite --platform=win32 --arch=ia32 --icon={icon path .ico} --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName="AutoBenchClient" --electron-version={build electron version}
 
-In the project directory, you can run:
+# MacOS
+electron-packager . --overwrite --platform=darwin --arch=x64 --icon={icon path .icns} --prune=true --out=release-builds --electron-version={build electron version}
+```
 
-### `yarn start`
+## Support Platform
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| 운영체제 | 바이너리 | 최소 지원 버전 |
+|-|-|-|
+| OS X | x64 | 10.9 이후 버전 |
+| Windows	| x86, x64 (ARM 버전 윈도우는 지원하지 않음) | Windows 7 이후 버전 |
+| Linux | ia32(i686), x64(amd64), arm | Ubuntu 12.04 이후 버전<br/> Fedora 21<br/> Debian 8 |
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 추가 자료 [여기](https://proinlab.com/archives/1928)
 
-### `yarn test`
+### windows
+```
+npm install -g asar # 소스 코드 암호화
+npm install --save-dev electron-winstaller # 윈도우 인스톨러
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### MacOS
+```
+npm install -g electron-installer-dmg
+electron-installer-dmg ./dist/AutoBench-darwin-x64/AutoBench.app AutoBench --out=./dist
+```
 
-### `yarn build`
+### Deploy Shell Scripts
+```
+# delete older files
+rm -rf dist
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# windows exe pacakaging
+electron-packager ./ AutoBench --platform=win32 --arch x64 --out dist --prune
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+# asar packaging
+asar pack ./dist/AutoBench-win32-x64/resources/app ./dist/AutoBench-win32-x64/resources/app.asar
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# delete source dir
+rm -rf ./dist/AutoBench-win32-x64/resources/app
 
-### `yarn eject`
+# create installer
+node installer.js
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# create mac app and dmg
+electron-packager ./ AutoBench --platform=darwin --arch x64 --out dist --prune
+electron-installer-dmg ./dist/AutoBench-darwin-x64/AutoBench.app AutoBench --out=./dist
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

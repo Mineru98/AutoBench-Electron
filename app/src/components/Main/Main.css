@@ -1,5 +1,7 @@
 .App {
+	height: 664px;
   text-align: center;
+	background-color: #ffffff;
 }
 
 .App-logo {
@@ -12,20 +14,32 @@
   }
 }
 
-.App-header {
-	background-color: #ffffff;
-  background-color: #282c34;
-  min-height: 100vh;
+.home_frame {
+  background-color: #E4E2E5;
+  height: 500px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
+.home_frame2 {
+	height: 164px;
+	display: flex;
+	background-color: #FFFFFF;
+	flex-direction: column;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.home_searchbar_top {
+	margin-bottom: 38px;
+}
+
+.home_searchbar_bottom {
+	margin-top: 38px;
 }
 
 .home_rounded {
@@ -36,6 +50,11 @@
   border-radius: 50px;
 	text-align: left;
 	box-shadow: 2px 2px 2px #858585;
+}
+
+#home_input {
+	width: 230px;
+
 }
 
 @keyframes App-logo-spin {

@@ -18,9 +18,12 @@
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron .\"",
+    "start:react": "react-scripts start",
+    "build:react": "react-scripts build",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon={icon path .icns} --prune=true --out=release-builds --electron-version=7.1.7",
+    "package-win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --icon={icon path .ico} --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"AutoBenchClient\" --electron-version=7.1.7",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icon-512-nocolor.png} --prune=true --out=release-builds --electron-version=7.1.7"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,6 +44,9 @@
     "concurrently": "^5.0.2",
     "electron": "^7.1.7",
     "electron-builder": "^21.2.0",
+    "electron-packager": "^14.1.1",
+    "electron-prebuilt": "^1.4.13",
+    "electron-winstaller": "^4.0.0",
     "wait-on": "^3.3.0"
   },
   "main": "public/electron.js"
