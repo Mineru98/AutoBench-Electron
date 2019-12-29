@@ -1,7 +1,12 @@
-import React from 'react';
-import { Grid, Header, Input } from 'semantic-ui-react'; 
-import logo from './setting.svg';
-import './Main.css';
+import React from 'react'
+import { Grid, Header, Input } from 'semantic-ui-react'
+import logo from './setting.svg'
+import cpuImg from '../../assets/cpu.png'
+import gpuImg from '../../assets/gpu.png'
+import ramImg from '../../assets/ram.png'
+import driveImg from '../../assets/drive.png'
+import mainboardImg from '../../assets/mainboard.png'
+import './Main.css'
 
 function Main() {
 	return (
@@ -17,7 +22,7 @@ function Main() {
 						<Grid.Column width={2}/>
 						<Grid.Column verticalAlign="middle" width={5}>
 							<div className="home_rounded">
-								<img src="img/mainboard.png" width="30" alt="mainboard" />
+								<img src={mainboardImg} width="30" alt="mainboard" />
 							</div>
 						</Grid.Column>
 						<Grid.Column width={2}/>
@@ -30,7 +35,7 @@ function Main() {
 								<Grid>
 									<Grid.Row>
 										<Grid.Column width={3}>
-											<img id="home_icon" src="img/cpu.png" width="30" alt="cpu" />
+											<img id="home_icon" src={cpuImg} width="30" alt="cpu" />
 										</Grid.Column>
 										<Grid.Column width={12}>
 											<Input placeholder='Search...' size="mini" id="home_input"/>
@@ -42,7 +47,7 @@ function Main() {
 						<Grid.Column width={2}/>
 						<Grid.Column width={5}>
 							<div className="home_rounded">
-								<img src="img/gpu.png" width="30" alt="gpu" />
+								<img src={gpuImg} width="30" alt="gpu" />
 							</div>
 						</Grid.Column>
 						<Grid.Column width={2}/>
@@ -52,13 +57,13 @@ function Main() {
 						<Grid.Column width={2}/>
 						<Grid.Column width={5}>
 							<div className="home_rounded">
-								<img src="img/drive.png" width="30" alt="drive" />
+								<img src={driveImg} width="30" alt="drive" />
 							</div>
 						</Grid.Column>
 						<Grid.Column width={2}/>
 						<Grid.Column width={5}>
 							<div className="home_rounded">
-								<img src="img/ram.png" width="30" alt="ram" />
+								<img src={ramImg} width="30" alt="ram" />
 							</div>
 						</Grid.Column>
 						<Grid.Column width={2}/>

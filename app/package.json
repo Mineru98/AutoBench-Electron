@@ -18,12 +18,64 @@
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
+		"clear": "rm -rf dist && rm -rf build",
     "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron .\"",
     "start:react": "react-scripts start",
     "build:react": "react-scripts build",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon={icon path .icns} --prune=true --out=release-builds --electron-version=7.1.7",
-    "package-win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --icon={icon path .ico} --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"AutoBenchClient\" --electron-version=7.1.7",
-    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icon-512-nocolor.png} --prune=true --out=release-builds --electron-version=7.1.7"
+		"build": "yarn build:linux && yarn build:osx && yarn build:win",
+		"build:osx": "electron-builder --mac",
+    "build:linux": "yarn build:linux32 && yarn build:linux64",
+    "build:linux32": "electron-builder --linux --ia32",
+    "build:linux64": "electron-builder --linux --x64",
+    "build:win": "yarn build:win32 && yarn build:win64", 
+    "build:win32": "electron-builder --win --ia32",
+    "build:win64": "electron-builder --win --x64",
+		"deploy:win32": "nodejs installer.js"
+  },
+	"build": {
+    "productName": "AutoBench",
+    "appId": "com.electron.hello",
+    "asar": true,
+    "protocols" : {
+        "name" : "AutoBench",
+        "schemes" : ["AutoBench"]
+    },
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "icon": "./assets/icon.icns"
+    },
+    "dmg": {
+      "title": "AutoBench",
+      "icon": "./assets/icon.icns"
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "./assets/icon-512.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "zip",
+        "tar.gz"
+      ],
+      "icon": "./assets/icon-512-nocolor.png"
+    },
+    "nsis":{
+      "oneClick" : false,
+      "allowToChangeInstallationDirectory" :true
+    },
+    "directories": {
+      "buildResources": "assets/",
+      "output": "dist/",
+      "app": "."
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
