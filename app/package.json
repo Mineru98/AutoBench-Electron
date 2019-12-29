@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.0",
     "chart.js": "^2.9.3",
     "electron-is-dev": "^1.1.0",
@@ -21,8 +18,7 @@
 		"clear": "rm -rf dist && rm -rf build",
     "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron .\"",
     "start:react": "react-scripts start",
-    "build:react": "react-scripts build",
-		"build": "yarn build:linux && yarn build:osx && yarn build:win",
+    "build": "react-scripts build",
 		"build:osx": "electron-builder --mac",
     "build:linux": "yarn build:linux32 && yarn build:linux64",
     "build:linux32": "electron-builder --linux --ia32",
@@ -34,7 +30,7 @@
   },
 	"build": {
     "productName": "AutoBench",
-    "appId": "com.electron.hello",
+    "appId": "com.mineru.autobench",
     "asar": true,
     "protocols" : {
         "name" : "AutoBench",
