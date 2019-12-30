@@ -18,6 +18,10 @@ electron-packager . --overwrite --platform=darwin --arch=x64 --icon={icon path .
 | Windows	| x86, x64 (ARM 버전 윈도우는 지원하지 않음) | Windows 7 이후 버전 |
 | Linux | ia32(i686), x64(amd64), arm | Ubuntu 12.04 이후 버전<br/> Fedora 21<br/> Debian 8 |
 
+## 준비물
+```
+```
+
 ## 추가 자료 [여기](https://proinlab.com/archives/1928)
 
 ### windows

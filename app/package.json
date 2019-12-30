@@ -1,11 +1,13 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "autobench",
+  "version": "0.0.1",
   "private": true,
+  "author": "Mineru98 <mineru664500@gmail.com>",
   "dependencies": {
     "axios": "^0.19.0",
     "chart.js": "^2.9.3",
     "electron-is-dev": "^1.1.0",
+    "ms-wmic": "^1.0.4",
     "react": "^16.12.0",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.12.0",
@@ -15,26 +17,29 @@
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
-		"clear": "rm -rf dist && rm -rf build",
-    "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron .\"",
+    "clear": "rm -rf dist && rm -rf build",
+		"test":"electron",
+    "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron main.js\"",
     "start:react": "react-scripts start",
     "build": "react-scripts build",
-		"build:osx": "electron-builder --mac",
+    "build:osx": "electron-builder --mac",
     "build:linux": "yarn build:linux32 && yarn build:linux64",
     "build:linux32": "electron-builder --linux --ia32",
     "build:linux64": "electron-builder --linux --x64",
-    "build:win": "yarn build:win32 && yarn build:win64", 
+    "build:win": "yarn build:win32 && yarn build:win64",
     "build:win32": "electron-builder --win --ia32",
     "build:win64": "electron-builder --win --x64",
-		"deploy:win32": "nodejs installer.js"
+    "deploy:win32": "nodejs installer.js"
   },
-	"build": {
+  "build": {
     "productName": "AutoBench",
     "appId": "com.mineru.autobench",
     "asar": true,
-    "protocols" : {
-        "name" : "AutoBench",
-        "schemes" : ["AutoBench"]
+    "protocols": {
+      "name": "autobench",
+      "schemes": [
+        "autobench"
+      ]
     },
     "mac": {
       "target": [
@@ -54,6 +59,7 @@
       "icon": "./assets/icon-512.ico"
     },
     "linux": {
+      "executableName": "AutoBench",
       "target": [
         "AppImage",
         "deb",
@@ -61,16 +67,16 @@
         "zip",
         "tar.gz"
       ],
+      "category": "Utility",
       "icon": "./assets/icon-512-nocolor.png"
     },
-    "nsis":{
-      "oneClick" : false,
-      "allowToChangeInstallationDirectory" :true
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     },
     "directories": {
       "buildResources": "assets/",
-      "output": "dist/",
-      "app": "."
+      "output": "dist/"
     }
   },
   "eslintConfig": {
@@ -94,8 +100,8 @@
     "electron-builder": "^21.2.0",
     "electron-packager": "^14.1.1",
     "electron-prebuilt": "^1.4.13",
+    "electron-rebuild": "^1.8.8",
     "electron-winstaller": "^4.0.0",
     "wait-on": "^3.3.0"
-  },
-  "main": "public/electron.js"
+  }
 }
