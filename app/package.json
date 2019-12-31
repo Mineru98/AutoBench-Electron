@@ -79,6 +79,7 @@
       "output": "dist/"
     }
   },
+	"repository": "https://github.com/Mineru98/AutoBench-Electron",
   "eslintConfig": {
     "extends": "react-app"
   },
