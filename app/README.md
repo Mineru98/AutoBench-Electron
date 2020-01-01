@@ -10,6 +10,11 @@ electron-packager . {project folder} --overwrite --platform=win32 --arch=ia32 --
 electron-packager . --overwrite --platform=darwin --arch=x64 --icon={icon path .icns} --prune=true --out=release-builds --electron-version={build electron version}
 ```
 
+## module 설정
+ - electron-rebuild
+  - 이 실행 파일은 Electron 프로젝트에서 사용중인 Node.js 버전에 대해 기본 Node.js 모듈을 다시 빌드합니다. 이를 통해 시스템 버전의 Node.js가 정확히 일치하지 않는 Electron 앱에서 기본 Node.js 모듈을 사용할 수 있습니다 (종종 그렇지 않은 경우도 있고 때로는 불가능한 경우도 있음).
+  - ```electron-rebuild -f -w sqlite3```
+
 ## Support Platform
 
 | 운영체제 | 바이너리 | 최소 지원 버전 |

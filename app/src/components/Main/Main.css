@@ -66,12 +66,13 @@
 	width: 230px;
 }
 
-.home_text {
-}
-
 #home_text {
 	cursor: pointer;
 	padding-top: 3.5px;
+}
+
+#home_logo {
+	padding: 0px 0px 0px 25px;
 }
 
 .search-input {

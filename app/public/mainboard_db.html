@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="https://motherboarddb.com/">MotherboardDB</a>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="https://motherboarddb.com/">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://motherboarddb.com/motherboards/">Motherboards</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://motherboarddb.com/advanced-search/">Advanced Search</a>
+				</li>
+				<li class="nav-item d-sm-none d-xl-block">
+					<a class="nav-link" href="https://motherboarddb.com/reviews/">External Reviews</a>
+				</li>
+				<li class="nav-item d-sm-none d-xl-block">
+					<a class="nav-link" href="https://motherboarddb.com/statistics/">Statistics</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://motherboarddb.com/blog/">News</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://motherboarddb.com/contact/">Contact</a>
+				</li>
+			</ul>
+			<form id="comparison-dropdown" class="form-inline">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Comparison
+							<span class="badge badge-light" id="comparison-count">0</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="https://motherboarddb.com/compare/">
+								<b>Go to comparison</b>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</form>
+			<form class="form-inline my-2 my-lg-0" role="search" action="https://motherboarddb.com/search/">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search..." name="search">
+				<button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Motherboards</h1>
+				<hr>
+			</div>
+		</div>
+		<div class="row main-content">
+			<button type="button" class="d-lg-none btn btn-outline-primary btn-block mb-3" data-toggle="collapse" data-target="#sidebar">Show/Hide Filters</button>
+			<div class="col-lg-2 sidebar collapse show" id="sidebar">
+				<form method="get" id="filter-form">
+					<input type="hidden" name="csrfmiddlewaretoken" value="2aZ8Fg4ljK0qwJcpg1Kz9PZkzaPEN61zayn4J7CZM1keHkcKZ8ngzpXwfgseYKbx">
+					<div class="form-group">
+						<h6>
+							<label for="id_search">Search:</label>
+						</h6>
+						<input type="text" name="search" id="id_search" class="form-control">
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_manufacturer">Manufacturer:</label>
+						</h6>
+						<select name="manufacturer" id="id_manufacturer" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_manufacturer" tabindex="-1" aria-hidden="true">
+							<option value="1">Asrock</option>
+							<option value="10">Asus</option>
+							<option value="9">Biostar</option>
+							<option value="20">Colorful</option>
+							<option value="15">ECS</option>
+							<option value="12">EVGA</option>
+							<option value="14">Foxconn</option>
+							<option value="21">Fujitsu</option>
+							<option value="7">Gigabyte</option>
+							<option value="35">Jetway</option>
+							<option value="11">MSI</option>
+							<option value="18">Maxsun</option>
+							<option value="36">NZXT</option>
+							<option value="30">SOYO</option>
+							<option value="37">Sapphire</option>
+							<option value="24">Supermicro</option>
+							<option value="25">XFX</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_form_factor">Form Factor:</label>
+						</h6>
+						<select name="form_factor" id="id_form_factor" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_form_factor" tabindex="-1" aria-hidden="true">
+							<option value="2">ATX</option>
+							<option value="5">E-ATX</option>
+							<option value="12">HPTX</option>
+							<option value="1">Micro-ATX</option>
+							<option value="8">Micro-DTX</option>
+							<option value="11">Micro-STX</option>
+							<option value="3">Mini-ITX</option>
+							<option value="6">Mini-STX</option>
+							<option value="7">Proprietary</option>
+							<option value="10">SSI-CEB</option>
+							<option value="9">SSI-EEB</option>
+							<option value="4">Thin Mini-ITX</option>
+							<option value="13">XL-ATX</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_socket">Socket:</label>
+						</h6>
+						<select name="socket" id="id_socket" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_socket" tabindex="-1" aria-hidden="true">
+							<option value="20">AM2</option>
+							<option value="19">AM2+</option>
+							<option value="11">AM3</option>
+							<option value="5">AM3+</option>
+							<option value="1">AM4</option>
+							<option value="13">FM2+</option>
+							<option value="3">LGA 1150</option>
+							<option value="2">LGA 1151</option>
+							<option value="14">LGA 1155</option>
+							<option value="17">LGA 1156</option>
+							<option value="8">LGA 1366</option>
+							<option value="15">LGA 2011</option>
+							<option value="6">LGA 2011-3</option>
+							<option value="7">LGA 2066</option>
+							<option value="12">LGA 3647</option>
+							<option value="18">LGA 775</option>
+							<option value="4">Onboard CPU</option>
+							<option value="9">SP3</option>
+							<option value="10">TR4</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="3" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_chipset">Chipset:</label>
+						</h6>
+						<select name="chipset" id="id_chipset" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_chipset" tabindex="-1" aria-hidden="true">
+							<option value="56">AMD 760G</option>
+							<option value="46">AMD 770</option>
+							<option value="44">AMD 790FX</option>
+							<option value="62">AMD 870</option>
+							<option value="54">AMD 880G</option>
+							<option value="45">AMD 890FX</option>
+							<option value="53">AMD 890GX</option>
+							<option value="49">AMD 970</option>
+							<option value="48">AMD 990FX</option>
+							<option value="63">AMD 990X</option>
+							<option value="1">AMD A320</option>
+							<option value="52">AMD A70M</option>
+							<option value="24">AMD A88X</option>
+							<option value="2">AMD B350</option>
+							<option value="64">AMD B450</option>
+							<option value="3">AMD X370</option>
+							<option value="17">AMD X399</option>
+							<option value="61">AMD X470</option>
+							<option value="70">AMD X570</option>
+							<option value="55">Intel 5520</option>
+							<option value="67">Intel 945GC</option>
+							<option value="16">Intel B150</option>
+							<option value="7">Intel B250</option>
+							<option value="57">Intel B360</option>
+							<option value="69">Intel B365</option>
+							<option value="8">Intel C232</option>
+							<option value="18">Intel C236</option>
+							<option value="71">Intel C242</option>
+							<option value="51">Intel C422</option>
+							<option value="50">Intel C606</option>
+							<option value="66">Intel C612</option>
+							<option value="20">Intel C621</option>
+							<option value="23">Intel C622</option>
+							<option value="22">Intel C624</option>
+							<option value="21">Intel C628</option>
+							<option value="4">Intel H110</option>
+							<option value="47">Intel H170</option>
+							<option value="6">Intel H270</option>
+							<option value="59">Intel H310</option>
+							<option value="60">Intel H370</option>
+							<option value="72">Intel H97</option>
+							<option value="38">Intel P35</option>
+							<option value="41">Intel P45</option>
+							<option value="30">Intel P55</option>
+							<option value="28">Intel P67</option>
+							<option value="39">Intel P965</option>
+							<option value="15">Intel Q150</option>
+							<option value="11">Intel Q170</option>
+							<option value="14">Intel Q270</option>
+							<option value="65">Intel Q370</option>
+							<option value="13">Intel X299</option>
+							<option value="40">Intel X38</option>
+							<option value="42">Intel X48</option>
+							<option value="43">Intel X58</option>
+							<option value="27">Intel X79</option>
+							<option value="12">Intel X99</option>
+							<option value="10">Intel Z170</option>
+							<option value="5">Intel Z270</option>
+							<option value="19">Intel Z370</option>
+							<option value="58">Intel Z390</option>
+							<option value="26">Intel Z68</option>
+							<option value="25">Intel Z77</option>
+							<option value="33">Intel Z87</option>
+							<option value="9">Intel Z97</option>
+							<option value="34">Nvidia 680i SLI</option>
+							<option value="32">Nvidia nForce 590 SLI</option>
+							<option value="31">Nvidia nForce 780a SLI</option>
+							<option value="37">Nvidia nForce 780i SLI</option>
+							<option value="36">Nvidia nForce 790i SLI</option>
+							<option value="35">Nvidia nForce 790i Ultra SLI</option>
+							<option value="68">VIA P4M800</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="4" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_ram_type">Memory Type:</label>
+						</h6>
+						<select name="ram_type" id="id_ram_type" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_ram_type" tabindex="-1" aria-hidden="true">
+							<option value="1">DDR1</option>
+							<option value="2">DDR2</option>
+							<option value="3">DDR3</option>
+							<option value="5">DDR3L</option>
+							<option value="4">DDR4</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_network_chip">Network Chip:</label>
+						</h6>
+						<select name="network_chip" id="id_network_chip" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_network_chip" tabindex="-1" aria-hidden="true">
+							<option value="23">Aquantia AQC107</option>
+							<option value="3">Aquantia AQC108</option>
+							<option value="66">Aquantia AQC111</option>
+							<option value="57">Broadcom BCM 57781</option>
+							<option value="24">Broadcom BCM 57810S</option>
+							<option value="44">Intel 82567V</option>
+							<option value="58">Intel 82574L</option>
+							<option value="43">Intel 82579V</option>
+							<option value="55">Intel 82583V</option>
+							<option value="32">Intel C621 Chipset</option>
+							<option value="13">Intel I210</option>
+							<option value="16">Intel I210-AT</option>
+							<option value="18">Intel I211</option>
+							<option value="2">Intel I211-AT</option>
+							<option value="30">Intel I217-LM</option>
+							<option value="25">Intel I217-V</option>
+							<option value="67">Intel I218-LM</option>
+							<option value="10">Intel I218-V</option>
+							<option value="14">Intel I219-LM</option>
+							<option value="9">Intel I219-V</option>
+							<option value="78">Intel I350-AM2</option>
+							<option value="31">Intel X540</option>
+							<option value="29">Intel X550-AT</option>
+							<option value="68">Intel X550-AT2</option>
+							<option value="33">Intel X557</option>
+							<option value="6">Intel [Unknown]</option>
+							<option value="50">Killer E2100</option>
+							<option value="15">Killer E2200</option>
+							<option value="52">Killer E2201</option>
+							<option value="26">Killer E2205</option>
+							<option value="12">Killer E2400</option>
+							<option value="5">Killer E2500</option>
+							<option value="77">Killer E3000</option>
+							<option value="45">Marvell 8059</option>
+							<option value="49">Marvell 88E1116</option>
+							<option value="35">Marvell 88E1512</option>
+							<option value="51">Marvell 88E8001</option>
+							<option value="19">Marvell 88E8056</option>
+							<option value="61">Marvell 88E8057</option>
+							<option value="64">Marvell 88E8059</option>
+							<option value="54">Qualcomm Atheros AR8151</option>
+							<option value="75">Qualcomm Atheros AR8161</option>
+							<option value="17">Qualcomm Atheros AR8171</option>
+							<option value="70">Realtek RTL8100C</option>
+							<option value="69">Realtek RTL8102EL</option>
+							<option value="41">Realtek RTL8105E</option>
+							<option value="53">Realtek RTL8106E</option>
+							<option value="47">Realtek RTL8110SC</option>
+							<option value="62">Realtek RTL8111B</option>
+							<option value="48">Realtek RTL8111C</option>
+							<option value="63">Realtek RTL8111D</option>
+							<option value="60">Realtek RTL8111DL</option>
+							<option value="27">Realtek RTL8111E</option>
+							<option value="56">Realtek RTL8111EP</option>
+							<option value="59">Realtek RTL8111EPV</option>
+							<option value="20">Realtek RTL8111F</option>
+							<option value="22">Realtek RTL8111G</option>
+							<option value="28">Realtek RTL8111GN</option>
+							<option value="1">Realtek RTL8111GR</option>
+							<option value="7">Realtek RTL8111H</option>
+							<option value="46">Realtek RTL8112L</option>
+							<option value="74">Realtek RTL8117</option>
+							<option value="8">Realtek RTL8118AS</option>
+							<option value="65">Realtek RTL8125AG</option>
+							<option value="72">Realtek RTL8125CG</option>
+							<option value="73">Realtek RTL8211E</option>
+							<option value="34">Realtek RTL8211E-VB-CG</option>
+							<option value="36">Realtek [Unknown 100]</option>
+							<option value="4">Realtek [Unknown]</option>
+							<option value="71">VIA VT6103L</option>
+							<option value="42">[Unknown] 100 mbit</option>
+							<option value="21">[Unknown] 1000 mbit</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="6" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_audio_chip">Audio Chip:</label>
+						</h6>
+						<select name="audio_chip" id="id_audio_chip" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_audio_chip" tabindex="-1" aria-hidden="true">
+							<option value="19">Analog Devices AD1988B</option>
+							<option value="17">Analog Devices AD2000B</option>
+							<option value="21">Cmedia CM6632</option>
+							<option value="6">Creative CA0132</option>
+							<option value="25">Creative CA20K2</option>
+							<option value="10">Creative [Unknown]</option>
+							<option value="5">Realtek ALC1150</option>
+							<option value="29">Realtek ALC1200</option>
+							<option value="3">Realtek ALC1220</option>
+							<option value="31">Realtek ALC233</option>
+							<option value="24">Realtek ALC255</option>
+							<option value="22">Realtek ALC283</option>
+							<option value="30">Realtek ALC655</option>
+							<option value="12">Realtek ALC662</option>
+							<option value="11">Realtek ALC671</option>
+							<option value="1">Realtek ALC887</option>
+							<option value="14">Realtek ALC888</option>
+							<option value="13">Realtek ALC888S</option>
+							<option value="7">Realtek ALC889</option>
+							<option value="27">Realtek ALC889A</option>
+							<option value="28">Realtek ALC890</option>
+							<option value="2">Realtek ALC892</option>
+							<option value="18">Realtek ALC898</option>
+							<option value="20">Realtek [unknown]</option>
+							<option value="23">VIA VT1705</option>
+							<option value="16">VIA VT2010</option>
+							<option value="15">VIA VT2020</option>
+							<option value="26">VIA VT2021</option>
+							<option value="8">[Unknown] 6-channel</option>
+							<option value="9">[Unknown] 8-channel</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="7" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_product_series">Product Series:</label>
+						</h6>
+						<select name="product_series" id="id_product_series" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_product_series" tabindex="-1" aria-hidden="true">
+							<option value="12">Asrock Extreme</option>
+							<option value="2">Asrock Fatal1ty</option>
+							<option value="11">Asrock OC Formula</option>
+							<option value="23">Asrock Phantom</option>
+							<option value="1">Asrock Pro</option>
+							<option value="3">Asrock Taichi</option>
+							<option value="19">Asus Expedition</option>
+							<option value="8">Asus Prime</option>
+							<option value="7">Asus ROG</option>
+							<option value="16">Asus TUF</option>
+							<option value="20">Biostar Gaming</option>
+							<option value="9">Biostar Hi-Fi</option>
+							<option value="6">Biostar PRO</option>
+							<option value="10">Biostar Racing</option>
+							<option value="5">Gigabyte Aorus</option>
+							<option value="17">Gigabyte Designare</option>
+							<option value="21">Gigabyte G1 Gaming</option>
+							<option value="13">Gigabyte Gaming</option>
+							<option value="22">Gigabyte OC</option>
+							<option value="18">Gigabyte Super Overclock</option>
+							<option value="4">Gigabyte Ultra Durable</option>
+							<option value="15">MSI Arsenal Gaming</option>
+							<option value="14">MSI Pro</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_colors">Colors:</label>
+						</h6>
+						<select name="colors" id="id_colors" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_colors" tabindex="-1" aria-hidden="true">
+							<option value="1">Black</option>
+							<option value="4">Blue</option>
+							<option value="11">Brown</option>
+							<option value="12">Copper</option>
+							<option value="8">Gold</option>
+							<option value="7">Gray</option>
+							<option value="6">Green</option>
+							<option value="15">Olive</option>
+							<option value="13">Orange</option>
+							<option value="10">RGB</option>
+							<option value="3">Red</option>
+							<option value="9">Silver</option>
+							<option value="14">Tan</option>
+							<option value="2">White</option>
+							<option value="5">Yellow</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="9" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>
+							<label for="id_market">Market:</label>
+						</h6>
+						<select name="market" id="id_market" multiple="" class="select2-widget form-control select2-hidden-accessible" data-select2-id="id_market" tabindex="-1" aria-hidden="true">
+							<option value="c">Consumer</option>
+							<option value="i">Industrial</option>
+							<option value="s">Server</option>
+						</select>
+						<span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="10" style="width: 168px;">
+							<span class="selection">
+								<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+									<ul class="select2-selection__rendered">
+										<li class="select2-search select2-search--inline">
+											<input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="Click to select..." style="width: 166px;">
+										</li>
+									</ul>
+								</span>
+							</span>
+							<span class="dropdown-wrapper" aria-hidden="true"></span>
+						</span>
+					</div>
+					<div class="form-group">
+						<h6>SATA3 Ports:</h6>
+						<div id="sata" class="slider-filter noUi-target noUi-ltr noUi-horizontal" data-filter-min="1" data-filter-max="18">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="18.0" aria-valuenow="1.0" aria-valuetext="1">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">1</div>
+									</div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="18.0" aria-valuenow="18.0" aria-valuetext="18">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">18</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<h6>USB 2.0 Headers:</h6>
+						<div id="usb2" class="slider-filter noUi-target noUi-ltr noUi-horizontal" data-filter-min="1" data-filter-max="4">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="4.0" aria-valuenow="1.0" aria-valuetext="1">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">1</div>
+									</div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="4.0" aria-valuenow="4.0" aria-valuetext="4">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">4</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<h6>USB 3.0 Headers:</h6>
+						<div id="usb3_header" class="slider-filter noUi-target noUi-ltr noUi-horizontal" data-filter-min="1" data-filter-max="4">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="4.0" aria-valuenow="1.0" aria-valuetext="1">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">1</div>
+									</div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="4.0" aria-valuenow="4.0" aria-valuetext="4">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">4</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<h6>USB 3.0 Back-IO:</h6>
+						<div id="usb3_backio" class="slider-filter noUi-target noUi-ltr noUi-horizontal" data-filter-min="1" data-filter-max="10">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="10.0" aria-valuenow="1.0" aria-valuetext="1">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">1</div>
+									</div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="10.0" aria-valuenow="10.0" aria-valuetext="10">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">10</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<h6>4-Pin Fan Headers:</h6>
+						<div id="4pin_fan" class="slider-filter noUi-target noUi-ltr noUi-horizontal" data-filter-min="1" data-filter-max="10">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="10.0" aria-valuenow="1.0" aria-valuetext="1">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">1</div>
+									</div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="1.0" aria-valuemax="10.0" aria-valuenow="10.0" aria-valuetext="10">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">10</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<h6>Release Year:</h6>
+						<div id="year" class="slider-filter noUi-target noUi-ltr noUi-horizontal" data-filter-min="2000" data-filter-max="2019">
+							<div class="noUi-base">
+								<div class="noUi-connects">
+									<div class="noUi-connect" style="transform: translate(0%, 0px) scale(1, 1);"></div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(-100%, 0px); z-index: 5;">
+									<div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="2000.0" aria-valuemax="2019.0" aria-valuenow="2000.0" aria-valuetext="2000">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">2000</div>
+									</div>
+								</div>
+								<div class="noUi-origin" style="transform: translate(0%, 0px); z-index: 4;">
+									<div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="2000.0" aria-valuemax="2019.0" aria-valuenow="2019.0" aria-valuetext="2019">
+										<div class="noUi-touch-area"></div>
+										<div class="noUi-tooltip">2019</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a href="https://motherboarddb.com/advanced-search/">
+						<small>Go To Advanced Search</small>
+					</a>
+				</form>
+			</div>
+			<div class="col" id="table-wrapper">
+				<div class="row">
+					<div class="col-12 col-xl-8">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<nav>
+									<ul class="pagination pagination-sm">
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="2">Previous</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="1">1</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="2">2</a>
+										</li>
+										<li class="page-item active">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="3">3</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="4">4</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="5">5</a>
+										</li>
+
+										<li class="page-item disabled">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#">...</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="85">85</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="4">Next</a>
+										</li>
+									</ul>
+								</nav>
+							</li>
+							<li class="list-inline-item d-none d-md-inline-block">
+								<p>Showing 41-60 of 1685</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-4 col-xl-2">
+						<div class="form-group">
+							<select class="form-control form-control-sm sort-order-link">
+								<option value="p">Popularity</option>
+								<option value="n">Name</option>
+								<option value="y" selected="selected">Year</option>
+								<option value="f">Form Factor</option>
+								<option value="c">Chipset</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-8 col-xl-2">
+						<div class="float-right">
+							<div class="btn-group btn-group-sm" role="group">
+								<a class="btn btn-secondary display-type-link listview-button" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" role="button" data-display="list">List</a>
+								<a class="btn btn-outline-secondary display-type-link tableview-button" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" role="button" data-display="table">Table</a>
+								<a class="btn btn-outline-secondary display-type-link gridview-button" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" role="button" data-display="grid">Grid</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/509/ROG%20Rampage%20III%20Gene/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/ROG_Rampage_III_Gene-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/509/ROG%20Rampage%20III%20Gene/">
+								<h4>Asus ROG Rampage III Gene</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x LGA 1366
+									</li>
+									<li>
+										<b>Form Factor:</b> Micro-ATX</li>
+									<li>
+										<b>Chipset:</b> Intel X58</li>
+									<li>
+										<b>RAM:</b>
+										6x DDR3 @ 2200 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-509">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="509"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT2020</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										2
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										2
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/510/ROG%20Crosshair%20IV%20Formula/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/ROG_Crosshair_IV_Formula-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/510/ROG%20Crosshair%20IV%20Formula/">
+								<h4>Asus ROG Crosshair IV Formula</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890FX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-510">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="510"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT2020</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										6
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/511/ROG%20Crosshair%20IV%20Extreme/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/ROG_Crosshair_IV_Extreme-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/511/ROG%20Crosshair%20IV%20Extreme/">
+								<h4>Asus ROG Crosshair IV Extreme</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> E-ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890FX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2133 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-511">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="511"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC889</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										6
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/512/ROG%20Rampage%20III%20Extreme/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/ROG_Rampage_III_Extreme-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/512/ROG%20Rampage%20III%20Extreme/">
+								<h4>Asus ROG Rampage III Extreme</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x LGA 1366
+									</li>
+									<li>
+										<b>Form Factor:</b> E-ATX</li>
+									<li>
+										<b>Chipset:</b> Intel X58</li>
+									<li>
+										<b>RAM:</b>
+										6x DDR3 @ 2200 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-512">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="512"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC889</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										1
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										2
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/513/ROG%20Maximus%20III%20Extreme/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/ROG_Maximus_III_Extreme-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/513/ROG%20Maximus%20III%20Extreme/">
+								<h4>Asus ROG Maximus III Extreme</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x LGA 1156
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> Intel P55</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2200 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-513">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="513"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT2020</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										2
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										2
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/970/890FX%20Deluxe3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/890FX_Deluxe3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/970/890FX%20Deluxe3/">
+								<h4>Asrock 890FX Deluxe3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890FX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-970">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="970"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT2020</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										2
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										8
+
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/972/890GX%20Extreme3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/890GX_Extreme3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/972/890GX%20Extreme3/">
+								<h4>Asrock 890GX Extreme3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3+
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890GX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-972">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="972"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT2020</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										4
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+
+										6
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/973/890GX%20Pro3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/890GX_Pro3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/973/890GX%20Pro3/">
+								<h4>Asrock 890GX Pro3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3+
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890GX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-973">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="973"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC892</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+
+									</li>
+									<li>
+										<b>SATA3:</b>
+										5
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/975/890GX%20Extreme4/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/890GX_Extreme4-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/975/890GX%20Extreme4/">
+								<h4>Asrock 890GX Extreme4</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890GX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-975">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="975"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC892</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+
+										1
+									</li>
+									<li>
+										<b>SATA3:</b>
+										5
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/976/890GM%20Pro3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/890GM_Pro3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/976/890GM%20Pro3/">
+								<h4>Asrock 890GM Pro3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> Micro-ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890GX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-976">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="976"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT2020</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										4
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										5
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/977/890GMH/USB3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/890GMH-USB3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/977/890GMH/USB3/">
+								<h4>Asrock 890GMH/USB3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> Micro-ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 890GX</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-977">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="977"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC892</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										5
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/978/880G%20Extreme3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/880G_Extreme3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/978/880G%20Extreme3/">
+								<h4>Asrock 880G Extreme3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3+
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 880G</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-978">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="978"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT2020</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+
+										4
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										6
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/982/880GXH/USB3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/880GXH-USB3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/982/880GXH/USB3/">
+								<h4>Asrock 880GXH/USB3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 880G</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-982">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="982"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC892</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/983/880GMH/USB3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/880GMH-USB3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/983/880GMH/USB3/">
+								<h4>Asrock 880GMH/USB3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> Micro-ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 880G</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-983">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="983"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC892</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/984/880GMH/USB3%20R2.0/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/880GMH-USB3_R2.0-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/984/880GMH/USB3%20R2.0/">
+								<h4>Asrock 880GMH/USB3 R2.0</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> Micro-ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 880G</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-984">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="984"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC892</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/985/880GMH-LE/USB3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/880GMH-LE-USB3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/985/880GMH-LE/USB3/">
+								<h4>Asrock 880GMH-LE/USB3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> Micro-ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 880G</li>
+									<li>
+										<b>RAM:</b>
+										2x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-985">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="985"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> VIA VT1705</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/986/880GM-LE/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/880GM-LE-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/986/880GM-LE/">
+								<h4>Asrock 880GM-LE</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> Micro-ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 880G</li>
+									<li>
+										<b>RAM:</b>
+										2x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-986">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="986"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC662</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/989/Classified%20SR-2/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/Classified_SR-2-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/989/Classified%20SR-2/">
+								<h4>EVGA Classified SR-2</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										2x LGA 1366
+									</li>
+									<li>
+										<b>Form Factor:</b> HPTX</li>
+									<li>
+										<b>Chipset:</b> Intel 5520</li>
+									<li>
+										<b>RAM:</b>
+										12x DDR3 @ 1600 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-989">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="989"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC889</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										2
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+
+										2
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/1196/GA-X58A-UD9/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/GA-X58A-UD9-1-thumbnail-300x300.png">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/1196/GA-X58A-UD9/">
+								<h4>Gigabyte GA-X58A-UD9</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x LGA 1366
+									</li>
+									<li>
+										<b>Form Factor:</b> XL-ATX</li>
+									<li>
+										<b>Chipset:</b> Intel X58</li>
+									<li>
+										<b>RAM:</b>
+										6x DDR3 @ 2200 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-1196">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="1196"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC889</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+
+									</li>
+									<li>
+										<b>SATA3:</b>
+										2
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-3">
+						<a href="https://motherboarddb.com/motherboards/1198/870%20Extreme3/">
+							<img class="img-fluid table-img" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/870_Extreme3-1-thumbnail-300x300-70.jpg">
+						</a>
+					</div>
+					<div class="col">
+						<div class="row mb-1">
+							<a href="https://motherboarddb.com/motherboards/1198/870%20Extreme3/">
+								<h4>Asrock 870 Extreme3</h4>
+							</a>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="list-unstyled">
+									<li>
+										<b>Socket(s):</b>
+										1x AM3
+									</li>
+									<li>
+										<b>Form Factor:</b> ATX</li>
+									<li>
+										<b>Chipset:</b> AMD 870</li>
+									<li>
+										<b>RAM:</b>
+										4x DDR3 @ 2000 MHz
+									</li>
+									<li>
+										<b>Release Year:</b> 2010</li>
+								</ul>
+								<div class="comparison-button" id="comparison-button-1198">
+									<span class="border rounded p-1 form-check">
+										<label class="form-check-label">
+											<input class="form-check-input cmp-check" type="checkbox" value="1198"> Compare
+										</label>
+									</span>
+								</div>
+							</div>
+							<div class="col d-none d-md-block">
+								<ul class="list-unstyled">
+									<li>
+										<b>Audio Chip:</b> Realtek ALC892</li>
+									<li>
+										<b>USB 2.0 Headers:</b>
+
+										3
+									</li>
+									<li>
+										<b>USB 3.0 Headers:</b>
+									</li>
+									<li>
+										<b>SATA3:</b>
+										5
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-12 col-xl-8">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<nav>
+									<ul class="pagination pagination-sm">
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="2">Previous</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="1">1</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="2">2</a>
+										</li>
+										<li class="page-item active">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="3">3</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="4">4</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="5">5</a>
+										</li>
+
+										<li class="page-item disabled">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#">...</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="85">85</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" data-page="4">Next</a>
+										</li>
+									</ul>
+								</nav>
+							</li>
+							<li class="list-inline-item d-none d-md-inline-block">
+								<p>Showing 41-60 of 1685</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-4 col-xl-2">
+						<div class="form-group">
+							<select class="form-control form-control-sm sort-order-link">
+								<option value="p">Popularity</option>
+								<option value="n">Name</option>
+								<option value="y" selected="selected">Year</option>
+								<option value="f">Form Factor</option>
+								<option value="c">Chipset</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-8 col-xl-2">
+						<div class="float-right">
+							<div class="btn-group btn-group-sm" role="group">
+								<a class="btn btn-secondary display-type-link listview-button" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" role="button" data-display="list">List</a>
+								<a class="btn btn-outline-secondary display-type-link tableview-button" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" role="button" data-display="table">Table</a>
+								<a class="btn btn-outline-secondary display-type-link gridview-button" href="https://motherboarddb.com/motherboards/?page=3&amp;so=y#" role="button" data-display="grid">Grid</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			window.onload = function() {
+				initializeTable("motherboards");
+			};
+			$(document).ready(function() {
+				if ($(window).width() >= 992) {
+					$("#sidebar").addClass("show");
+				}
+			});
+			$(document).ready(function() {
+				$('.select2-widget').select2({
+					placeholder: 'Click to select...'
+				});
+			});
+			$(".select2-widget").on("change", function(event) {
+				event.preventDefault();
+				analyzeForm();
+			});
+			$("#filter-form").keyup(function(event) {
+				event.preventDefault();
+				analyzeForm();
+			});
+		</script>
+	</div>
+	<div class="container">
+		<footer>
+			<hr>
+			<p class="small">Copyright © 2020 MotherboardDB</p>
+		</footer>
+	</div>
+	<script>
+		$("[data-fancybox]").fancybox({
+			hash: false
+		});
+	</script>
+
+	<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;">
+		<ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;">
+			<ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;">
+				<iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}"
+				  id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/saved_resource.html"></iframe>
+			</ins>
+		</ins>
+	</ins>
+	<iframe id="google_osd_static_frame_4648114665763" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/saved_resource(1).html"></iframe>
+</body>
+<iframe id="google_esf" name="google_esf" src="./All Motherboards - Motherboard Specifications On MotherboardDB_files/zrt_lookup.html" data-ad-client="ca-pub-1259056164805415" style="display: none;"></iframe>
+
+</html>

@@ -102,7 +102,7 @@ class Main extends React.Component {
 					<Grid>
 						<Grid.Row>
 							<Grid.Column width={2}/>
-							<Grid.Column width={5}>
+							<Grid.Column width={5} id="home_logo">
 								<img src={logo} className="App-logo" alt="logo" width="150"/>
 								<Header size="huge">AutoBench</Header>
 							</Grid.Column>
