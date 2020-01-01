@@ -13,12 +13,13 @@
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-search-input": "^0.11.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
     "clear": "rm -rf dist && rm -rf build",
-		"test":"electron",
+    "test": "electron",
     "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron main.js\"",
     "start:react": "react-scripts start",
     "build": "react-scripts build",
@@ -28,8 +29,7 @@
     "build:linux64": "electron-builder --linux --x64",
     "build:win": "yarn build:win32 && yarn build:win64",
     "build:win32": "electron-builder --win --ia32",
-    "build:win64": "electron-builder --win --x64",
-    "deploy:win32": "nodejs installer.js"
+    "build:win64": "electron-builder --win --x64"
   },
   "build": {
     "productName": "AutoBench",
@@ -79,7 +79,7 @@
       "output": "dist/"
     }
   },
-	"repository": "https://github.com/Mineru98/AutoBench-Electron",
+  "repository": "https://github.com/Mineru98/AutoBench-Electron",
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -1,0 +1,22 @@
+export default [{rank: 1,name: "G Skill Intl F4-4500C19-8GTZKKE 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 2,name: "G Skill Intl F4-4400C19-8GTZSW 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 3,name: "G Skill Intl F4-4600C18-8GTZR 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 4,name: "G Skill Intl F4-4000C19-16GTZKK 16GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 5,name: "G Skill Intl F4-3600C16-8GTZN 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 6,name: "Kingston KHX4266C19D4/8GX 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/kingston_icon.png"},
+{rank: 7,name: "Corsair CMW16GX4M2K3600C16 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/corsair_icon.png"},
+{rank: 8,name: "Team Group Inc. TEAMGROUP-UD4-4133 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/teamgroup_icon.png"},
+{rank: 9,name: "Corsair CMK16GX4M2F4500C19 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/corsair_icon.png"},
+{rank: 10,name: "G Skill Intl F4-4266C19-8GTZSW 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 11,name: "A-DATA Technology DDR4 3300 2OZ 4GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/adata_icon.png"},
+{rank: 12,name: "G Skill Intl F4-4000C18-8GTRS 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 13,name: "G Skill Intl F4-4400C18-8GTZR 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 14,name: "Corsair CMK32GX4M4K4266C19 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/corsair_icon.png"},
+{rank: 15,name: "G Skill Intl F4-3600C17-8GTZSW 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 16,name: "Team Group Inc. TEAMGROUP-D4-3866 4GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/teamgroup_icon.png"},
+{rank: 17,name: "Corsair CMW32GX4M4C3200C14 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/corsair_icon.png"},
+{rank: 18,name: "G Skill Intl F4-3200C14-8GTRS 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/gskill_icon.png"},
+{rank: 19,name: "Corsair CMT16GX4M2K3600C16 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/corsair_icon.png"},
+{rank: 20,name: "Patriot Memory (PDP Systems) 3866 C18 Series 8GB",img: "http://autobench-electron-kirna.run.goorm.io/imgs/null_icon.png"}]
+
+

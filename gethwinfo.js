@@ -1,6 +1,22 @@
 import wmic from 'ms-wmic'
 
-export default function gethwinfo() {
+export function gethwinfo_win() {
+	let cpu = "hwinfo ---cpu";
+  let no_package = "lscpu | grep \"Model name\"";
+    
+  let gpu = "sudo lshw -C display";
+  let gpu2 = "lspci | grep -i --color 'vga\|3d\|2d'";
+    
+  let mem = "hwinfo --memory";
+  let mem_dmidecode = "dmidecode -t memory | grep \"Part Number\"";
+    
+  let mainboard = "dmidecode -s baseboard-product-name";
+  let mainboard2 = "dmidecode -t baseboard"
+    
+  let drive = "hwinfo -- disk";
+}
+
+export function gethwinfo_win() {
     return new Promise((resolve, reject) => {
         wmic.execute('MEMORYCHIP get PartNumber', (err, stdOut) => {
             if (err) reject(new Error("error case #mem"));
