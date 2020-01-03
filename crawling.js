@@ -83,7 +83,8 @@ for( var key in list ) {
 	getData(list[key]).then(value => {
 		let ulList = [];
 		let chip, video, storage, usb2a = 0, usb3a = 0, usb3c = 0, usb3_1_2_a = 0, usb3_1_2_c = 0;// 체크포인트 지정
-		let sata3 = 0, sataE = 0;
+		let ide = 0, sata1 = 0, sata2 = 0, sata3 = 0, sataE = 0, sas = 0;
+		let pci_16 = 0, pci_4 = 0, pci_1 = 0, crossfire = false, sli = false;
 		
 		value[1].forEach((element, index) =>{
 			if (element == "Chipset")
@@ -116,22 +117,58 @@ for( var key in list ) {
 		});
 		
 		value[3].forEach((element,index) =>{
+			if (element.indexOf("IDE") != -1) {
+				ide += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("SATA1") != -1) {
+				sata1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("SATA2") != -1) {
+				sata2 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
 			if (element.indexOf("SATA3") != -1) {
 				sata3 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
 			}
 			if (element.indexOf("SATA Express") != -1) {
 				sataE += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
 			}
+			if (element.indexOf("Mini-SAS") != -1) {
+				sas += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
 		})
+		
+		value[6].forEach((element, index)=>{
+			if (element.indexOf("@ x16") != -1) {
+				pci_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("@ x14") != -1) {
+				pci_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("1x @ x1") != -1) {
+				pci_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("AMD Crossfire") != -1) {
+				if(value[index] = "No") crossfire = false
+				else if(value[index] = "Yes") crossfire = true
+			}
+			if(element.indexOf("Nvidia SLI") != -1) {
+				if(value[index] = "No") sli = false
+				else if(value[index] = "Yes") sli = true
+			}
+		})
+		
+		console.log("Crossfire:" + crossfire)
+		console.log("SLI:" + sli)
+
 		
 		if(value.length == 10) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
 			// console.log(value.length, value[2])
-			console.log(value.length, value[3])
+			// console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
-			// console.log(value.length, value[6])
+			console.log(value.length, value[6])
 			// console.log(value.length, value[7])
 			// console.log(value.length, value[8])
 			if (chip == 9) {
@@ -148,8 +185,12 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -165,18 +206,22 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			}
 		} else if (value.length == 11) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
 			// console.log(value.length, value[2])
-			console.log(value.length, value[3])
+			// console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
-			// console.log(value.length, value[6])
+			console.log(value.length, value[6])
 			// console.log(value.length, value[7])
 			// console.log(value.length, value[8])
 			// console.log(value.length, value[9])
@@ -194,8 +239,12 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -211,18 +260,22 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			}
 		} else if (value.length == 12) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
 			// console.log(value.length, value[2])
-			console.log(value.length, value[3])
+			// console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
-			// console.log(value.length, value[6])
+			console.log(value.length, value[6])
 			// console.log(value.length, value[8])
 			// console.log(value.length, value[9])
 			// console.log(value.length, value[10])
@@ -240,8 +293,12 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -257,18 +314,22 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			}
 		} else if (value.length == 13) {
 			// console.log(value.length, value[0])
 			// console.log(value.leusb2: value[1)
 			// console.log(value.length, value[2])
-			console.log(value.length, value[3])
+			// console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
-			// console.log(value.length, value[6])
+			console.log(value.length, value[6])
 			// console.log(value.length, value[8])
 			// console.log(value.length, value[9])
 			// console.log(value.length, value[10])
@@ -286,8 +347,12 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -303,18 +368,22 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			}
 		} else if (value.length == 14) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
 			// console.log(value.length, value[2])
-			console.log(value.length, value[3])
+			// console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
-			// console.log(value.length, value[6])
+			console.log(value.length, value[6])
 			// console.log(value.length, value[7])
 			// console.log(value.length, value[8])
 			if (chip == 9) {
@@ -331,8 +400,12 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -348,18 +421,22 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			}
 		} else if (value.length == 15) {
-			// console.log(value.length, value[0])
+			// console.log(value.length, value@ x16[0])
 			// console.log(value.length, value[1])
 			// console.log(value.length, value[2])
-			console.log(value.length, value[3])
+			// console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
-			// console.log(value.length, value[6])
+			console.log(value.length, value[6])
 			// console.log(value.length, value[7])
 			// console.log(value.length, value[8])
 			if (chip == 9) {
@@ -376,8 +453,12 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -393,8 +474,12 @@ for( var key in list ) {
 					usb3c: usb3c,
 					usb3_1_2_a: usb3_1_2_a,
 					usb3_1_2_c: usb3_1_2_c,
+					ide: ide,
+					sata1: sata1,
+					sata2: sata2,
 					sata3: sata3,
 					sata_express: sataE,
+					sas: sas,
 				};
 			}
 		}
