@@ -82,7 +82,8 @@ function getData(i) {
 for( var key in list ) {
 	getData(list[key]).then(value => {
 		let ulList = [];
-		let chip, video, storage, usb; // 체크포인트 지정
+		let chip, video, storage, usb2a = 0, usb3a = 0, usb3c = 0, usb3_1_2_a = 0, usb3_1_2_c = 0;// 체크포인트 지정
+		let sata3 = 0, sataE = 0;
 		
 		value[1].forEach((element, index) =>{
 			if (element == "Chipset")
@@ -97,15 +98,37 @@ for( var key in list ) {
 				storage = index
 		});
 		value[2].forEach((element, index) =>{
-			if (element == "USB")
-				usb = index
+			if (element.indexOf("USB 2.0 Type-A") != -1) {
+				usb2a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("USB 3.0 Type-A") != -1) {
+				usb3a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("USB 3.0 Type-C") != -1) {
+				usb3c += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("USB 3.1 Gen-2 Type-A") != -1) {
+				usb3_1_2_a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("USB 3.1 Gen-2 Type-C") != -1) {
+				usb3_1_2_c += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
 		});
+		
+		value[3].forEach((element,index) =>{
+			if (element.indexOf("SATA3") != -1) {
+				sata3 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+			if (element.indexOf("SATA Express") != -1) {
+				sataE += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+			}
+		})
 		
 		if(value.length == 10) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
-			console.log(value.length, value[2])
-			// console.log(value.length, value[3])
+			// console.log(value.length, value[2])
+			console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
 			// console.log(value.length, value[6])
@@ -120,9 +143,13 @@ for( var key in list ) {
 					form: value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[7],
-					usb2: value[13],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -133,16 +160,20 @@ for( var key in list ) {
 					form: value[1][chip-2]+value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[2][1],
-					usb2: value[2][1],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			}
 		} else if (value.length == 11) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
-			console.log(value.length, value[2])
-			// console.log(value.length, value[3])
+			// console.log(value.length, value[2])
+			console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
 			// console.log(value.length, value[6])
@@ -158,9 +189,13 @@ for( var key in list ) {
 					form: value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[7],
-					usb2: value[13],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -171,16 +206,20 @@ for( var key in list ) {
 					form: value[1][chip-2]+value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[2][1],
-					usb2: value[2][1],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			}
 		} else if (value.length == 12) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
-			console.log(value.length, value[2])
-			// console.log(value.length, value[3])
+			// console.log(value.length, value[2])
+			console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
 			// console.log(value.length, value[6])
@@ -196,9 +235,13 @@ for( var key in list ) {
 					form: value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[7],
-					usb2: value[13],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -209,16 +252,20 @@ for( var key in list ) {
 					form: value[1][chip-2]+value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[2][1],
-					usb2: value[2][1],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			}
 		} else if (value.length == 13) {
 			// console.log(value.length, value[0])
-			// console.log(value.length, value[1])
-			console.log(value.length, value[2])
-			// console.log(value.length, value[3])
+			// console.log(value.leusb2: value[1)
+			// console.log(value.length, value[2])
+			console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
 			// console.log(value.length, value[6])
@@ -234,9 +281,13 @@ for( var key in list ) {
 					form: value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[7],
-					usb2: value[13],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -247,16 +298,20 @@ for( var key in list ) {
 					form: value[1][chip-2]+value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[2][1],
-					usb2: value[2][1],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			}
 		} else if (value.length == 14) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
-			console.log(value.length, value[2])
-			// console.log(value.length, value[3])
+			// console.log(value.length, value[2])
+			console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
 			// console.log(value.length, value[6])
@@ -271,9 +326,13 @@ for( var key in list ) {
 					form: value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[7],
-					usb2: value[13],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -284,16 +343,20 @@ for( var key in list ) {
 					form: value[1][chip-2]+value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[2][1],
-					usb2: value[2][1],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			}
 		} else if (value.length == 15) {
 			// console.log(value.length, value[0])
 			// console.log(value.length, value[1])
-			console.log(value.length, value[2])
-			// console.log(value.length, value[3])
+			// console.log(value.length, value[2])
+			console.log(value.length, value[3])
 			// console.log(value.length, value[4])
 			// console.log(value.length, value[5])
 			// console.log(value.length, value[6])
@@ -308,9 +371,13 @@ for( var key in list ) {
 					form: value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[7],
-					usb2: value[13],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			} else if(chip == 10) {
 				ulList = {
@@ -321,9 +388,13 @@ for( var key in list ) {
 					form: value[1][chip-2]+value[1][chip-1],
 					chipset: value[1][chip+1],
 					support_ram: value[2][1],
-					usb2: value[2][1],
-					usb3: null,
-					sata: null
+					usb2a: usb2a,
+					usb3a: usb3a,
+					usb3c: usb3c,
+					usb3_1_2_a: usb3_1_2_a,
+					usb3_1_2_c: usb3_1_2_c,
+					sata3: sata3,
+					sata_express: sataE,
 				};
 			}
 		}
