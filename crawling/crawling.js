@@ -126,25 +126,25 @@ async function r_makefile() {
 }
 
 c_makefile().then(()=>{
-	fs.writeFile('database/cpu.json', JSON.stringify(c_list), 'utf8', (err)=>{
+	fs.writeFile('../database/cpu.json', JSON.stringify(c_list), 'utf8', (err)=>{
 		console.log("CPU OK")
 	});
 });
 
 g_makefile().then(()=>{
-	fs.writeFile('database/gpu.json', JSON.stringify(g_list), 'utf8', (err)=>{
+	fs.writeFile('../database/gpu.json', JSON.stringify(g_list), 'utf8', (err)=>{
 		console.log("GPU OK")
 	});
 });
 
 d_makefile().then(()=>{
-	fs.writeFile('database/drive.json', JSON.stringify(d_list), 'utf8', (err)=>{
+	fs.writeFile('../database/drive.json', JSON.stringify(d_list), 'utf8', (err)=>{
 		console.log("Drive OK")
 	});
 });
 
 r_makefile().then(()=>{
-	fs.writeFile('database/ram_read_amd.json', JSON.stringify(r_list), 'utf8', (err)=>{
+	fs.writeFile('../database/ram_read_amd.json', JSON.stringify(r_list), 'utf8', (err)=>{
 		console.log("RAM OK")
 	});
 });

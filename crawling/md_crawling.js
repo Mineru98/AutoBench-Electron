@@ -2326,7 +2326,7 @@ async function makefile() {
 };
 
 makefile().then(()=>{
-	fs.writeFile('mainboard/mainboard_tmp.json', JSON.stringify(result), 'utf8', (err)=>{
+	fs.writeFile('../database/mainboard.json', JSON.stringify(result), 'utf8', (err)=>{
 		console.log("OK")
 	});
 });

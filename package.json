@@ -7,8 +7,8 @@
   "author": "Mineru98 <rmstjr1030@naver.com>",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node --presets env main.js",
-    "test": "babel-node --presets env crawling.js"
+    "start": "babel-node --presets env hardwareinfo/main.js",
+    "crawl": "babel-node --presets env crawling/crawling.js"
   },
   "dependencies": {
     "axios": "^0.19.0",
