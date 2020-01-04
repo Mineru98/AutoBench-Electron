@@ -143,8 +143,8 @@ d_makefile().then(()=>{
 	});
 });
 
-// r_makefile().then(()=>{
-// 	fs.writeFile('database/ram_read_amd.json', JSON.stringify(r_list), 'utf8', (err)=>{
-// 		console.log("RAM OK")
-// 	});
-// });
+r_makefile().then(()=>{
+	fs.writeFile('database/ram_read_amd.json', JSON.stringify(r_list), 'utf8', (err)=>{
+		console.log("RAM OK")
+	});
+});
