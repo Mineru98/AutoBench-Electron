@@ -1,8 +1,15 @@
+const fs = require('fs');
 const axios = require("axios");
 const cheerio = require("cheerio");
-const fs = require('fs');
+const whitelist = require('./whitelist.js');
 
-const list = [29, 6, 82, 668, 1240, 1209, 1718]; // 9, 10, 11, 12, 13, 14
+// 0~ 1685
+const list = whitelist.getlist(0,1685);
+// const type_list = [255, 500, 518, 519, 522, 523, 524, 528, 529, 530, 535, 536, 538, 539, 540, 541, 542, 553, 649, 650, 652, 654, 660, 661, 667, 682, 696, 697, 894, 895, 896, 906, 907, 908, 969, 1157, 1201, 1202, 1213, 1214, 1215, 1220, 1221, 1222, 1224, 1225, 1233, 1234, 1235, 1236, 1237, 1238, 1239, 1240, 1241, 1242, 1243, 1265, 1270, 1271, 1273, 1385, 1386, 1387, 1388, 1394, 1396, 1404, 1405, 1498, 1499, 1522];
+
+// const count_list = [255, 500, 518, 519, 522, 523, 524, 528, 529, 530, 535, 536, 538, 539, 540, 541, 542, 553, 894, 895, 896, 906, 907, 908, 969, 1213, 1214, 1215, 1220, 1221, 1222, 1233, 1234, 1235, 1236, 1237, 1238, 1265, 1270, 1271, 1273];
+
+let result = []
 
 const getHtml = async (url, i) => {
   try {
@@ -33,7 +40,7 @@ function cpudataget() {
 			console.log(element);
 		});
 	});
-}
+};
 
 function getData(i) {
   return new Promise(function (resolve, reject) {
@@ -63,1257 +70,1323 @@ function getData(i) {
 			resolve(_list);
 		});
   });
-}
+};
 
-// 한번에 정상적으로 res 받을 수 있는 횟수는 50회
-// 9~14개의 플레그가 있다.
-// count 10 개일때 [9]은 제외
-// count 11 개일때 [10]은 제외
-// count 12 개일때 [7],[11]은 제외
-// count 13 개일때 [7],[11],[12]은 제외
-// count 14 개일때 [9],[10],[11],[12],[13]은 제외
-// count 15 개일때 [9],[10],[11],[12],[13],[14]은 제외
-for( var key in list ) {
-	getData(list[key]).then(value => {
-		let ulList = [];
-		let chip, video, storage, usb2a = 0, usb3a = 0, usb3c = 0, usb3_1_2_a = 0, usb3_1_2_c = 0;// 체크포인트 지정
-		let ide = 0, sata1 = 0, sata2 = 0, sata3 = 0, sataE = 0, sas = 0;
-		let pci1_1_16 = 0, pci1_1_8 = 0, pci1_1_4 = 0, pci1_1_1 = 0, pci1_4_16 = 0, pci1_4_8 = 0, pci1_4_4 = 0, pci1_4_1 = 0, pci1_8_16 = 0, pci1_8_8 = 0, pci1_8_4 = 0, pci1_8_1 = 0, pci1_16_16 = 0, pci1_16_8 = 0, pci1_16_4 = 0, pci1_16_1 = 0;
-		let pci2_1_16 = 0, pci2_1_8 = 0, pci2_1_4 = 0, pci2_1_1 = 0, pci2_4_16 = 0, pci2_4_8 = 0, pci2_4_4 = 0, pci2_4_1 = 0, pci2_8_16 = 0, pci2_8_8 = 0, pci2_8_4 = 0, pci2_8_1 = 0, pci2_16_16 = 0, pci2_16_8 = 0, pci2_16_4 = 0, pci2_16_1 = 0;
-		let pci3_1_16 = 0, pci3_1_8 = 0, pci3_1_4 = 0, pci3_1_1 = 0, pci3_4_16 = 0, pci3_4_8 = 0, pci3_4_4 = 0, pci3_4_1 = 0, pci3_8_16 = 0, pci3_8_8 = 0, pci3_8_4 = 0, pci3_8_1 = 0, pci3_16_16 = 0, pci3_16_8 = 0, pci3_16_4 = 0, pci3_16_1 = 0;
-		let crossfire = false, sli = false;
-		let mem_count = 0, mem_type = 0, mem_max_capacity = 0, mem_max_speed = 0;
-		let m2_e = 0, m2_m = 0;
-		
-		value[1].forEach((element, index) =>{
-			if (element == "Chipset")
-				chip = index
-		});
-		
-		value[2].forEach((element, index) =>{
-			if (element == "Video")
-				video = index
-		});
-		
-		value[2].forEach((element, index) =>{
-			if (element == "Storage")
-				storage = index
-		});
-		
-		value[2].forEach((element, index) =>{
-			if (element.indexOf("USB 2.0 Type-A") != -1) {
-				usb2a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("USB 3.0 Type-A") != -1) {
-				usb3a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("USB 3.0 Type-C") != -1) {
-				usb3c += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("USB 3.1 Gen-2 Type-A") != -1) {
-				usb3_1_2_a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("USB 3.1 Gen-2 Type-C") != -1) {
-				usb3_1_2_c += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-		});
-		
-		value[3].forEach((element,index) =>{
-			if (element.indexOf("IDE") != -1) {
-				ide += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("SATA1") != -1) {
-				sata1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("SATA2") != -1) {
-				sata2 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("SATA3") != -1) {
-				sata3 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("SATA Express") != -1) {
-				sataE += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("Mini-SAS") != -1) {
-				sas += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-		});
-		
-		value[6].forEach((element, index)=>{
-			if (element.indexOf("PCI-E 1.0 x1 @ x16") != -1) {
-				pci1_1_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x1 @ x8") != -1) {
-				pci1_1_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x1 @ x4") != -1) {
-				pci1_1_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x1 @ x1") != -1) {
-				pci1_1_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x4 @ x16") != -1) {
-				pci1_4_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x4 @ x8") != -1) {
-				pci1_4_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x4 @ x4") != -1) {
-				pci1_4_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x4 @ x1") != -1) {
-				pci1_4_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x8 @ x16") != -1) {
-				pci1_8_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x8 @ x8") != -1) {
-				pci1_8_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x8 @ x4") != -1) {
-				pci1_8_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x8 @ x1") != -1) {
-				pci1_8_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x16 @ x16") != -1) {
-				pci1_16_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x16 @ x8") != -1) {
-				pci1_16_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x16 @ x4") != -1) {
-				pci1_16_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 1.0 x16 @ x1") != -1) {
-				pci1_16_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			
-			
-			if (element.indexOf("PCI-E 2.0 x1 @ x16") != -1) {
-				pci2_1_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x1 @ x8") != -1) {
-				pci2_1_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x1 @ x4") != -1) {
-				pci2_1_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x1 @ x1") != -1) {
-				pci2_1_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x4 @ x16") != -1) {
-				pci2_4_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x4 @ x8") != -1) {
-				pci2_4_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x4 @ x4") != -1) {
-				pci2_4_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x4 @ x1") != -1) {
-				pci2_4_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x8 @ x16") != -1) {
-				pci2_8_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x8 @ x8") != -1) {
-				pci2_8_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x8 @ x4") != -1) {
-				pci2_8_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x8 @ x1") != -1) {
-				pci2_8_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x16 @ x16") != -1) {
-				pci2_16_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x16 @ x8") != -1) {
-				pci2_16_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x16 @ x4") != -1) {
-				pci2_16_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 2.0 x16 @ x1") != -1) {
-				pci2_16_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			
-			
-			if (element.indexOf("PCI-E 3.0 x1 @ x16") != -1) {
-				pci3_1_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x1 @ x8") != -1) {
-				pci3_1_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x1 @ x4") != -1) {
-				pci3_1_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x1 @ x1") != -1) {
-				pci3_1_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x4 @ x16") != -1) {
-				pci3_4_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x4 @ x8") != -1) {
-				pci3_4_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x4 @ x4") != -1) {
-				pci3_4_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x4 @ x1") != -1) {
-				pci3_4_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x8 @ x16") != -1) {
-				pci3_8_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x8 @ x8") != -1) {
-				pci3_8_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x8 @ x4") != -1) {
-				pci3_8_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x8 @ x1") != -1) {
-				pci3_8_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x16 @ x16") != -1) {
-				pci3_16_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x16 @ x8") != -1) {
-				pci3_16_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x16 @ x4") != -1) {
-				pci3_16_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			if (element.indexOf("PCI-E 3.0 x16 @ x1") != -1) {
-				pci3_16_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
-			}
-			
-			if (element.indexOf("AMD Crossfire") != -1) {
-				if(value[6][index+1] == "No") {
-					crossfire = false
+async function makefile() {
+	// 한번에 정상적으로 res 받을 수 있는 횟수는 50회
+	// 9~14개의 플레그가 있다.
+	// count 10 개일때 [9]은 제외
+	// count 11 개일때 [10]은 제외
+	// count 12 개일때 [7],[11]은 제외
+	// count 13 개일때 [7],[11],[12]은 제외
+	// count 14 개일때 [9],[10],[11],[12],[13]은 제외
+	// count 15 개일때 [9],[10],[11],[12],[13],[14]은 제외
+	for( var key in list ) {
+		console.log(list[key] + " 크롤링 시작");
+		await getData(list[key]).then(value => {
+			let ulList = [];
+			let chip, video, storage, usb2a = 0, usb3a = 0, usb3c = 0, usb3_1_2_a = 0, usb3_1_2_c = 0;// 체크포인트 지정
+			let ide = 0, sata1 = 0, sata2 = 0, sata3 = 0, sataE = 0, sas = 0;
+			let pci1_1_16 = 0, pci1_1_8 = 0, pci1_1_4 = 0, pci1_1_1 = 0, pci1_4_16 = 0, pci1_4_8 = 0, pci1_4_4 = 0, pci1_4_1 = 0, pci1_8_16 = 0, pci1_8_8 = 0, pci1_8_4 = 0, pci1_8_1 = 0, pci1_16_16 = 0, pci1_16_8 = 0, pci1_16_4 = 0, pci1_16_1 = 0;
+			let pci2_1_16 = 0, pci2_1_8 = 0, pci2_1_4 = 0, pci2_1_1 = 0, pci2_4_16 = 0, pci2_4_8 = 0, pci2_4_4 = 0, pci2_4_1 = 0, pci2_8_16 = 0, pci2_8_8 = 0, pci2_8_4 = 0, pci2_8_1 = 0, pci2_16_16 = 0, pci2_16_8 = 0, pci2_16_4 = 0, pci2_16_1 = 0;
+			let pci3_1_16 = 0, pci3_1_8 = 0, pci3_1_4 = 0, pci3_1_1 = 0, pci3_4_16 = 0, pci3_4_8 = 0, pci3_4_4 = 0, pci3_4_1 = 0, pci3_8_16 = 0, pci3_8_8 = 0, pci3_8_4 = 0, pci3_8_1 = 0, pci3_16_16 = 0, pci3_16_8 = 0, pci3_16_4 = 0, pci3_16_1 = 0;
+			let crossfire = false, sli = false;
+			let mem_count = 0, mem_type = 0, mem_max_capacity = 0, mem_max_speed = 0;
+			let m2_e = 0, m2_m = 0;
+
+			value[1].forEach((element, index) =>{
+				if (element == "Chipset")
+					chip = index
+			});
+
+			value[2].forEach((element, index) =>{
+				if (element == "Video")
+					video = index
+			});
+
+			value[2].forEach((element, index) =>{
+				if (element == "Storage")
+					storage = index
+			});
+
+			value[2].forEach((element, index) =>{
+				if (element.indexOf("USB 2.0 Type-A") != -1) {
+					usb2a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
 				}
-				else if(value[6][index+1] == "Yes") {
-					crossfire = true
-				} 
-			}
-			
-			if(element.indexOf("Nvidia SLI") != -1) {
-				if(value[6][index+1] == "No") {
-					sli = false
+				if (element.indexOf("USB 3.0 Type-A") != -1) {
+					usb3a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
 				}
-				else if(value[6][index+1] == "Yes") {
-					sli = true
-				} 
-			}
-		});
-		
-		if (value.length > 11) {
-			value[9].forEach((element, index)=>{
-				if(value[9][0] == "M.2 Connections") {
-					if (element.indexOf("M-Key") != -1) {
-						m2_m += parseInt(value[9][index-1].replace(/[^0-9]/g,''))
-					}
-					if (element.indexOf("E-Key") != -1) {
-						m2_e += parseInt(value[9][index-1].replace(/[^0-9]/g,''))
-					}
+				if (element.indexOf("USB 3.0 Type-C") != -1) {
+					usb3c += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("USB 3.1 Gen-2 Type-A") != -1) {
+					usb3_1_2_a += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("USB 3.1 Gen-2 Type-C") != -1) {
+					usb3_1_2_c += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
 				}
 			});
-		}
-		
-		if (value.length > 12){
-			value[10].forEach((element, index)=>{
-				if(value[10][0] == "M.2 Connections") {
-					if (element.indexOf("M-Key") != -1) {
-						m2_m += parseInt(value[10][index-1].replace(/[^0-9]/g,''))
-					}
-					if (element.indexOf("E-Key") != -1) {
-						m2_e += parseInt(value[10][index-1].replace(/[^0-9]/g,''))
-					}
+
+			value[3].forEach((element,index) =>{
+				if (element.indexOf("IDE") != -1) {
+					ide += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("SATA1") != -1) {
+					sata1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("SATA2") != -1) {
+					sata2 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("SATA3") != -1) {
+					sata3 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("SATA Express") != -1) {
+					sataE += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("Mini-SAS") != -1) {
+					sas += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
 				}
 			});
-		}
-		
-		if(value.length == 11) {
-			
-			mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
-			
-			value[8].forEach((element, index) => {
-				if (element.indexOf("Slot Protocol") != -1)
-					mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Speed") != -1)
-					mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Capacity") != -1)
-					mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-			})
-			
-			if (chip == 9) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			} else if(chip == 10) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-2]+value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
+
+			value[6].forEach((element, index)=>{
+				if (element.indexOf("PCI-E 1.0 x1 @ x16") != -1) {
+					pci1_1_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x1 @ x8") != -1) {
+					pci1_1_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x1 @ x4") != -1) {
+					pci1_1_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x1 @ x1") != -1) {
+					pci1_1_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x4 @ x16") != -1) {
+					pci1_4_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x4 @ x8") != -1) {
+					pci1_4_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x4 @ x4") != -1) {
+					pci1_4_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x4 @ x1") != -1) {
+					pci1_4_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x8 @ x16") != -1) {
+					pci1_8_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x8 @ x8") != -1) {
+					pci1_8_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x8 @ x4") != -1) {
+					pci1_8_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x8 @ x1") != -1) {
+					pci1_8_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x16 @ x16") != -1) {
+					pci1_16_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x16 @ x8") != -1) {
+					pci1_16_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x16 @ x4") != -1) {
+					pci1_16_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 1.0 x16 @ x1") != -1) {
+					pci1_16_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+
+
+				if (element.indexOf("PCI-E 2.0 x1 @ x16") != -1) {
+					pci2_1_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x1 @ x8") != -1) {
+					pci2_1_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x1 @ x4") != -1) {
+					pci2_1_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}[],
+				if (element.indexOf("PCI-E 2.0 x1 @ x1") != -1) {
+					pci2_1_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x4 @ x16") != -1) {
+					pci2_4_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x4 @ x8") != -1) {
+					pci2_4_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x4 @ x4") != -1) {
+					pci2_4_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x4 @ x1") != -1) {
+					pci2_4_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x8 @ x16") != -1) {
+					pci2_8_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x8 @ x8") != -1) {
+					pci2_8_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x8 @ x4") != -1) {
+					pci2_8_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x8 @ x1") != -1) {
+					pci2_8_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x16 @ x16") != -1) {
+					pci2_16_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x16 @ x8") != -1) {
+					pci2_16_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x16 @ x4") != -1) {
+					pci2_16_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 2.0 x16 @ x1") != -1) {
+					pci2_16_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+
+
+				if (element.indexOf("PCI-E 3.0 x1 @ x16") != -1) {
+					pci3_1_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x1 @ x8") != -1) {
+					pci3_1_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x1 @ x4") != -1) {
+					pci3_1_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x1 @ x1") != -1) {
+					pci3_1_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x4 @ x16") != -1) {
+					pci3_4_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x4 @ x8") != -1) {
+					pci3_4_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x4 @ x4") != -1) {
+					pci3_4_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x4 @ x1") != -1) {
+					pci3_4_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x8 @ x16") != -1) {
+					pci3_8_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x8 @ x8") != -1) {
+					pci3_8_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x8 @ x4") != -1) {
+					pci3_8_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x8 @ x1") != -1) {
+					pci3_8_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x16 @ x16") != -1) {
+					pci3_16_16 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x16 @ x8") != -1) {
+					pci3_16_8 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x16 @ x4") != -1) {
+					pci3_16_4 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+				if (element.indexOf("PCI-E 3.0 x16 @ x1") != -1) {
+					pci3_16_1 += parseInt(element.substring(0,2).replace(/[^0-9]/g,''))
+				}
+
+				if (element.indexOf("AMD Crossfire") != -1) {
+					if(value[6][index+1] == "No") {
+						crossfire = false
+					}
+					else if(value[6][index+1] == "Yes") {
+						crossfire = true
+					} 
+				}
+
+				if(element.indexOf("Nvidia SLI") != -1) {
+					if(value[6][index+1] == "No") {
+						sli = false
+					}
+					else if(value[6][index+1] == "Yes") {
+						sli = true
+					} 
+				}
+			});
+
+			if (value.length > 11) {
+				value[9].forEach((element, index)=>{
+					if(value[9][0] == "M.2 Connections") {
+						if (element.indexOf("M-Key") != -1) {
+							m2_m += parseInt(value[9][index-1].replace(/[^0-9]/g,''))
+						}
+						if (element.indexOf("E-Key") != -1) {
+							m2_e += parseInt(value[9][index-1].replace(/[^0-9]/g,''))
+						}
+					}
+				});
 			}
-		} else if (value.length == 12) {
-			
-			mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
-			
-			value[8].forEach((element, index) => {
-				if (element.indexOf("Slot Protocol") != -1)
-					mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Speed") != -1)
-					mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Capacity") != -1)
-					mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-			})
-			
-			if (chip == 9) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			} else if(chip == 10) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-2]+value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
+
+			if (value.length > 12){
+				value[10].forEach((element, index)=>{
+					if(value[10][0] == "M.2 Connections") {
+						if (element.indexOf("M-Key") != -1) {
+							m2_m += parseInt(value[10][index-1].replace(/[^0-9]/g,''))
+						}
+						if (element.indexOf("E-Key") != -1) {
+							m2_e += parseInt(value[10][index-1].replace(/[^0-9]/g,''))
+						}
+					}
+				});
 			}
-		} else if (value.length == 13) {
 			
-			mem_count = parseInt(value[9][0].replace(/[^0-9]/g,''))
+			// console.log(value.length)
 			
-			value[9].forEach((element, index) => {
-				if (element.indexOf("Slot Protocol") != -1)
-					mem_type = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Speed") != -1)
-					mem_max_speed = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Capacity") != -1)
-					mem_max_capacity = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
-			})
-			if (chip == 9) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			} else if(chip == 10) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-2]+value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
+			if(value.length == 11) {
+
+				mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
+
+				value[8].forEach((element, index) => {
+					if (element.indexOf("Slot Protocol") != -1)
+						mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Speed") != -1)
+						mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Capacity") != -1)
+						mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+				})
+
+				if (chip == 9) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				} else if(chip == 10) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-2]+value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				}
+			} else if (value.length == 12) {
+				if (value[8][0] == 'Audiochip'){
+					mem_count = parseInt(value[9][0].replace(/[^0-9]/g,''))
+
+					value[9].forEach((element, index) => {
+						if (element.indexOf("Slot Protocol") != -1)
+							mem_type = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Speed") != -1)
+							mem_max_speed = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Capacity") != -1)
+							mem_max_capacity = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+					})
+				} else {
+					mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
+					value[8].forEach((element, index) => {
+						if (element.indexOf("Slot Protocol") != -1)
+							mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Speed") != -1)
+							mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Capacity") != -1)
+							mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					})
+				}
+				
+
+				if (chip == 9) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				} else if(chip == 10) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-2]+value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				}
+			} else if (value.length == 13) {
+				if(value[9][0] == 'Reviewer'){
+					mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
+
+					value[8].forEach((element, index) => {
+						if (element.indexOf("Slot Protocol") != -1)
+							mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Speed") != -1)
+							mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Capacity") != -1)
+							mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					})
+				} else if (value[9][0] == 'M.2 Connections') {
+					mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
+
+					value[8].forEach((element, index) => {
+						if (element.indexOf("Slot Protocol") != -1)
+							mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Speed") != -1)
+							mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Capacity") != -1)
+							mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					})
+				} else {
+					mem_count = parseInt(value[9][0].replace(/[^0-9]/g,''))
+
+					value[9].forEach((element, index) => {
+						if (element.indexOf("Slot Protocol") != -1)
+							mem_type = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Speed") != -1)
+							mem_max_speed = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+						if (element.indexOf("Maximum Capacity") != -1)
+							mem_max_capacity = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+					})
+				}
+				
+				if (chip == 9) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				} else if(chip == 10) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-2]+value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				}
+			} else if (value.length == 14) {
+
+				mem_count = parseInt(value[9][0].replace(/[^0-9]/g,''))
+
+				value[9].forEach((element, index) => {
+					if (element.indexOf("Slot Protocol") != -1)
+						mem_type = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Speed") != -1)
+						mem_max_speed = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Capacity") != -1)
+						mem_max_capacity = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
+				})
+				if (chip == 9) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				} else if(chip == 10) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-2]+value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				}
+			} else if (value.length == 15) {
+				mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
+
+				value[8].forEach((element, index) => {
+					if (element.indexOf("Slot Protocol") != -1)
+						mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Speed") != -1)
+						mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Capacity") != -1)
+						mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+				})
+
+				if (chip == 9) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				} else if(chip == 10) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-2]+value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				}
+			} else if (value.length == 16) {
+
+				mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
+
+				value[8].forEach((element, index) => {
+					if (element.indexOf("Slot Protocol") != -1)
+						mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Speed") != -1)
+						mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+					if (element.indexOf("Maximum Capacity") != -1)
+						mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
+				})
+
+				if (chip == 9) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				} else if(chip == 10) {
+					ulList = {
+						id: parseInt(value[value.length-1]),
+						name: value[0],
+						manufacturer: value[1][1],
+						socket: value[1][5]+value[1][6],
+						form: value[1][chip-2]+value[1][chip-1],
+						chipset: value[1][chip+1],
+						usb2a: usb2a,
+						usb3a: usb3a,
+						usb3c: usb3c,
+						usb3_1_2_a: usb3_1_2_a,
+						usb3_1_2_c: usb3_1_2_c,
+						ide: ide,
+						sata1: sata1,
+						sata2: sata2,
+						sata3: sata3,
+						sata_express: sataE,
+						sas: sas,
+						mem_count: mem_count,
+						mem_type: mem_type,
+						mem_max_speed: mem_max_speed,
+						mem_max_capacity: mem_max_capacity,
+						pci1_16_16: pci1_16_16,
+						pci1_16_8: pci1_16_8,
+						pci1_16_4: pci1_16_4,
+						pci1_16_1: pci1_16_1,
+						pci1_8_16: pci1_8_16,
+						pci1_8_8: pci1_8_8,
+						pci1_8_4: pci1_8_4,
+						pci1_8_1: pci1_8_1,
+						pci1_4_16: pci1_4_16,
+						pci1_4_8: pci1_4_8,
+						pci1_4_4: pci1_4_4,
+						pci1_4_1: pci1_4_1,
+						pci1_1_16: pci1_1_16,
+						pci1_1_8: pci1_1_8,
+						pci1_1_4: pci1_1_4,
+						pci1_1_1: pci1_1_1,
+						pci2_16_16: pci2_16_16,
+						pci2_16_8: pci2_16_8,
+						pci2_16_4: pci2_16_4,
+						pci2_16_1: pci2_16_1,
+						pci2_8_16: pci2_8_16,
+						pci2_8_8: pci2_8_8,
+						pci2_8_4: pci2_8_4,
+						pci2_8_1: pci2_8_1,
+						pci2_4_16: pci2_4_16,
+						pci2_4_8: pci2_4_8,
+						pci2_4_4: pci2_4_4,
+						pci2_4_1: pci2_4_1,
+						pci2_1_16: pci2_1_16,
+						pci2_1_8: pci2_1_8,
+						pci2_1_4: pci2_1_4,
+						pci2_1_1: pci2_1_1,
+						pci3_16_16: pci3_16_16,
+						pci3_16_8: pci3_16_8,
+						pci3_16_4: pci3_16_4,
+						pci3_16_1: pci3_16_1,
+						pci3_8_16: pci3_8_16,
+						pci3_8_8: pci3_8_8,
+						pci3_8_4: pci3_8_4,
+						pci3_8_1: pci3_8_1,
+						pci3_4_16: pci3_4_16,
+						pci3_4_8: pci3_4_8,
+						pci3_4_4: pci3_4_4,
+						pci3_4_1: pci3_4_1,
+						pci3_1_16: pci3_1_16,
+						pci3_1_8: pci3_1_8,
+						pci3_1_4: pci3_1_4,
+						pci3_1_1: pci3_1_1,
+						crossfire: crossfire,
+						sli: sli,
+						m2_m: m2_m,
+						m2_e: m2_e
+					};
+				}
 			}
-		} else if (value.length == 14) {
-			
-			mem_count = parseInt(value[9][0].replace(/[^0-9]/g,''))
-			
-			value[9].forEach((element, index) => {
-				if (element.indexOf("Slot Protocol") != -1)
-					mem_type = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Speed") != -1)
-					mem_max_speed = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Capacity") != -1)
-					mem_max_capacity = parseInt(value[9][index+1].replace(/[^0-9]/g,''))
-			})
-			if (chip == 9) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			} else if(chip == 10) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-2]+value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			}
-		} else if (value.length == 15) {
-			
-			mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
-			
-			value[9].forEach((element, index) => {
-				if (element.indexOf("Slot Protocol") != -1)
-					mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Speed") != -1)
-					mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Capacity") != -1)
-					mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-			})
-			
-			if (chip == 9) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			} else if(chip == 10) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-2]+value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			}
-		} else if (value.length == 16) {
-			
-			mem_count = parseInt(value[8][0].replace(/[^0-9]/g,''))
-			
-			value[8].forEach((element, index) => {
-				if (element.indexOf("Slot Protocol") != -1)
-					mem_type = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Speed") != -1)
-					mem_max_speed = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-				if (element.indexOf("Maximum Capacity") != -1)
-					mem_max_capacity = parseInt(value[8][index+1].replace(/[^0-9]/g,''))
-			})
-			
-			if (chip == 9) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			} else if(chip == 10) {
-				ulList = {
-					id: value[value.length-1],
-					name: value[0],
-					manufacturer: value[1][1],
-					socket: value[1][5]+value[1][6],
-					form: value[1][chip-2]+value[1][chip-1],
-					chipset: value[1][chip+1],
-					usb2a: usb2a,
-					usb3a: usb3a,
-					usb3c: usb3c,
-					usb3_1_2_a: usb3_1_2_a,
-					usb3_1_2_c: usb3_1_2_c,
-					ide: ide,
-					sata1: sata1,
-					sata2: sata2,
-					sata3: sata3,
-					sata_express: sataE,
-					sas: sas,
-					mem_count: mem_count,
-					mem_type: mem_type,
-					mem_max_speed: mem_max_speed,
-					mem_max_capacity: mem_max_capacity,
-					pci1_16_16: pci1_16_16,
-					pci1_16_8: pci1_16_8,
-					pci1_16_4: pci1_16_4,
-					pci1_16_1: pci1_16_1,
-					pci1_8_16: pci1_8_16,
-					pci1_8_8: pci1_8_8,
-					pci1_8_4: pci1_8_4,
-					pci1_8_1: pci1_8_1,
-					pci1_4_16: pci1_4_16,
-					pci1_4_8: pci1_4_8,
-					pci1_4_4: pci1_4_4,
-					pci1_4_1: pci1_4_1,
-					pci1_1_16: pci1_1_16,
-					pci1_1_8: pci1_1_8,
-					pci1_1_4: pci1_1_4,
-					pci1_1_1: pci1_1_1,
-					pci2_16_16: pci2_16_16,
-					pci2_16_8: pci2_16_8,
-					pci2_16_4: pci2_16_4,
-					pci2_16_1: pci2_16_1,
-					pci2_8_16: pci2_8_16,
-					pci2_8_8: pci2_8_8,
-					pci2_8_4: pci2_8_4,
-					pci2_8_1: pci2_8_1,
-					pci2_4_16: pci2_4_16,
-					pci2_4_8: pci2_4_8,
-					pci2_4_4: pci2_4_4,
-					pci2_4_1: pci2_4_1,
-					pci2_1_16: pci2_1_16,
-					pci2_1_8: pci2_1_8,
-					pci2_1_4: pci2_1_4,
-					pci2_1_1: pci2_1_1,
-					pci3_16_16: pci3_16_16,
-					pci3_16_8: pci3_16_8,
-					pci3_16_4: pci3_16_4,
-					pci3_16_1: pci3_16_1,
-					pci3_8_16: pci3_8_16,
-					pci3_8_8: pci3_8_8,
-					pci3_8_4: pci3_8_4,
-					pci3_8_1: pci3_8_1,
-					pci3_4_16: pci3_4_16,
-					pci3_4_8: pci3_4_8,
-					pci3_4_4: pci3_4_4,
-					pci3_4_1: pci3_4_1,
-					pci3_1_16: pci3_1_16,
-					pci3_1_8: pci3_1_8,
-					pci3_1_4: pci3_1_4,
-					pci3_1_1: pci3_1_1,
-					m2_m: m2_m,
-					m2_e: m2_e
-				};
-			}
-		}
-		console.log(ulList)
-	});
-}
-/*
-for(var i = 1; i <= 50; i++){
-	getData(i).then(value => {
-		fs.appendFile('data1.csv', value, function (err) {
-			if (err) throw err;
+			result.push(ulList)
 		});
+	}
+};
+
+makefile().then(()=>{
+	// console.log(result)
+	fs.writeFile('mainboard/mainboard.json', JSON.stringify(result), 'utf8', (err)=>{
+		console.log("OK")
 	});
-}
-*/
+});
+
+
+
+
