@@ -1714,6 +1714,6 @@
 	{ "rank": 1713, "name": "Intel 82845G Controller", "score": 2 },
 	{ "rank": 1714, "name": "VIA Chrome9 HCM IGP", "score": 2 },
 	{ "rank": 1715, "name": "S3 ProSavageDDR", "score": 1 },
-	{ "rank": 1716, "name": "RAGE 128 PRO AGP 4X TMDS", "score": 1 },
-	{ "rank": 1717, "name": "Quadro2 Pro", "score": 1 }
+	{ "rank": 1716, "name": "RAGE 128 PRO AGP 4X TMDS", "score": 1, "url": "https://www.techpowerup.com/gpu-specs/rage-128-pro.c1716" },
+	{ "rank": 1717, "name": "Quadro2 Pro", "score": 1, "url": "https://www.techpowerup.com/gpu-specs/quadro2-pro.c2372" }
 ]
