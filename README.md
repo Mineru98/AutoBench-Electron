@@ -23,4 +23,5 @@
 ## [CPU Database](http://www.cpu-upgrade.com/)
 
 칩셋 참고 자료
+
 https://en.wikipedia.org/wiki/List_of_Intel_chipsets
