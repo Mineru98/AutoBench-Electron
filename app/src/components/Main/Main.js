@@ -1,9 +1,9 @@
-import Enum from 'enum'
+import Enum from 'enum';
 import React from 'react';
 import axios from 'axios';
 import { Grid, Header, Modal } from 'semantic-ui-react';
 import SearchInput, { createFilter } from 'react-search-input';
-import ExampleComponent from "react-rounded-image";
+import ExampleComponent from 'react-rounded-image';
 import Slider from 'infinite-react-carousel';
 import { Progress } from 'react-sweet-progress';
 
@@ -23,7 +23,15 @@ import './Main.css';
 
 const RAM_KEYS_TO_FILTERS = ['name', 'img'];
 const KEYS_TO_FILTERS = ['model_name', 'manufacturer'];
-const palette = new Enum({'Red': '#E03C31', 'Orange': '#FF7F41', 'Yellow': '#F7EA48', 'Green': '#6BC078', 'Blue': '#33BEB8', 'Indigo':'#147BD1', 'Purple':'#753BBD'});
+const palette = new Enum({
+	Red: '#E03C31',
+	Orange: '#FF7F41',
+	Yellow: '#F7EA48',
+	Green: '#6BC078',
+	Blue: '#33BEB8',
+	Indigo: '#147BD1',
+	Purple: '#753BBD'
+});
 
 class Main extends React.Component {
 	// linux & windows : hardwareinfo.index.js로 실행해서 최초 실행 시 model_name에 배치
@@ -447,49 +455,243 @@ class Main extends React.Component {
 						<Grid>
 							<Grid.Row columns={2}>
 								<Grid.Column>
+									<div className="HomeLabel">
+										<img src={label} alt="label" width="120" />
+										<div class="text-centered">No. 1201</div>
+									</div>
 									<div className="HomeHardware CPU">
 										{/*css width 값 조절 필요*/}
-										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Red.value}}} />
-										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Orange.value}}} />
-										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Yellow.value}}} />
-										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Green.value}}} />
-										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Blue.value}}} />
+										<div className="HomeProgressBarTop">
+											<Progress
+												percent={88}
+												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={83}
+												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={78}
+												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={73}
+												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={68}
+												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
+											/>
+										</div>
 									</div>
 								</Grid.Column>
 								<Grid.Column>
+									<div className="HomeLabel">
+										<img src={label} alt="label" width="120" />
+										<div class="text-centered">No. 1201</div>
+									</div>
 									<div className="HomeHardware GPU">
+										<div className="HomeProgressBarTop">
+											<Progress
+												percent={88}
+												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={83}
+												theme={{ active: { symbol: '40,000', color: palette.Purple.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={78}
+												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={73}
+												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={68}
+												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
+											/>
+										</div>
 									</div>
 								</Grid.Column>
 							</Grid.Row>
 							<Grid.Row columns={2}>
 								<Grid.Column>
-									<div className="HomeHardware Drive"></div>
+									<div className="HomeLabel">
+										<img src={label} alt="label" width="120" />
+										<div class="text-centered">No. 1201</div>
+									</div>
+									<div className="HomeHardware Drive">
+										<div className="HomeProgressBarTop">
+											<Progress
+												percent={88}
+												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={83}
+												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={78}
+												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={73}
+												theme={{ active: { symbol: '40,000', color: palette.Purple.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={68}
+												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
+											/>
+										</div>
+									</div>
 								</Grid.Column>
 								<Grid.Column>
-									<div className="HomeHardware RAM"></div>
+									<div className="HomeLabel">
+										<img src={label} alt="label" width="120" />
+										<div class="text-centered">No. 1201</div>
+									</div>
+									<div className="HomeHardware RAM">
+										<div className="HomeProgressBarTop">
+											<Progress
+												percent={88}
+												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={83}
+												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={78}
+												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={73}
+												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
+											/>
+										</div>
+										<div className="HomeProgressBar">
+											<Progress
+												percent={68}
+												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
+											/>
+										</div>
+									</div>
 								</Grid.Column>
 							</Grid.Row>
 						</Grid>
 					</div>
 				</div>
 				<div className="HomeBanner3">
-					
-					<div>
-						<Slider arrows={false} autoplay={true} dots={true}>
-							<div>
-								<h3>1</h3>
-							</div>
-							<div>
-								<h3>2</h3>
-							</div>
-							<div>
-								<h3>3</h3>
-							</div>
-							<div>
-								<h3>4</h3>
-							</div>
-						</Slider>
-					</div>
+					<Grid>
+						<Grid.Row columns={2}>
+							<Grid.Column>
+								<div className="HomeHardware">
+									<Slider arrows={false} autoplay={true} dots={true}>
+										<div>
+											<h3>1</h3>
+										</div>
+										<div>
+											<h3>2</h3>
+										</div>
+										<div>
+											<h3>3</h3>
+										</div>
+										<div>
+											<h3>4</h3>
+										</div>
+									</Slider>
+								</div>
+							</Grid.Column>
+							<Grid.Column>
+								<div className="HomeHardware">
+									<Slider arrows={false} autoplay={true} dots={true}>
+										<div>
+											<h3>1</h3>
+										</div>
+										<div>
+											<h3>2</h3>
+										</div>
+										<div>
+											<h3>3</h3>
+										</div>
+										<div>
+											<h3>4</h3>
+										</div>
+									</Slider>
+								</div>
+							</Grid.Column>
+						</Grid.Row>
+						<Grid.Row columns={2}>
+							<Grid.Column>
+								<div className="HomeHardware">
+									<Slider arrows={false} autoplay={true} dots={true}>
+										<div>
+											<h3>1</h3>
+										</div>
+										<div>
+											<h3>2</h3>
+										</div>
+										<div>
+											<h3>3</h3>
+										</div>
+										<div>
+											<h3>4</h3>
+										</div>
+									</Slider>
+								</div>
+							</Grid.Column>
+							<Grid.Column>
+								<div className="HomeHardware">
+									<Slider arrows={false} autoplay={true} dots={true}>
+										<div>
+											<h3>1</h3>
+										</div>
+										<div>
+											<h3>2</h3>
+										</div>
+										<div>
+											<h3>3</h3>
+										</div>
+										<div>
+											<h3>4</h3>
+										</div>
+									</Slider>
+								</div>
+							</Grid.Column>
+						</Grid.Row>
+					</Grid>
 				</div>
 			</div>
 		);
