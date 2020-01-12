@@ -1,20 +1,29 @@
+import Enum from 'enum'
 import React from 'react';
 import axios from 'axios';
 import { Grid, Header, Modal } from 'semantic-ui-react';
 import SearchInput, { createFilter } from 'react-search-input';
+import ExampleComponent from "react-rounded-image";
+import Slider from 'infinite-react-carousel';
+import { Progress } from 'react-sweet-progress';
 
 import ram_data from '../../assets/data/ram_data';
 
 import logo from '../../assets/imgs/setting.svg';
+import label from '../../assets/imgs/label.svg';
 import cpuImg from '../../assets/imgs/cpu.png';
 import gpuImg from '../../assets/imgs/gpu.png';
 import ramImg from '../../assets/imgs/ram.png';
 import driveImg from '../../assets/imgs/drive.png';
 import mainboardImg from '../../assets/imgs/mainboard.png';
+import MyPhoto from '../../assets/imgs/man.jpg';
+import Crown1 from '../../assets/imgs/crown1_icon.png';
+
 import './Main.css';
 
 const RAM_KEYS_TO_FILTERS = ['name', 'img'];
 const KEYS_TO_FILTERS = ['model_name', 'manufacturer'];
+const palette = new Enum({'Red': '#E03C31', 'Orange': '#FF7F41', 'Yellow': '#F7EA48', 'Green': '#6BC078', 'Blue': '#33BEB8', 'Indigo':'#147BD1', 'Purple':'#753BBD'});
 
 class Main extends React.Component {
 	// linux & windows : hardwareinfo.index.js로 실행해서 최초 실행 시 model_name에 배치
@@ -180,8 +189,8 @@ class Main extends React.Component {
 		let ram_filter = ram_data.filter(createFilter(this.state.searchTerm, RAM_KEYS_TO_FILTERS));
 
 		return (
-			<div className="App">
-				<div className="home_frame">
+			<div className="Home">
+				<div className="HomeBanner1_1">
 					<Grid>
 						<Grid.Row>
 							<Grid.Column width={2} />
@@ -418,7 +427,70 @@ class Main extends React.Component {
 						</Grid.Row>
 					</Grid>
 				</div>
-				<div className="home_frame2" />
+				<div className="HomeBanner1_2" />
+				<div className="HomeBanner2">
+					<div className="HomeRank">
+						<img id="Crown" src={Crown1} alt="crown1" width="64" />
+						<ExampleComponent
+							image={MyPhoto}
+							roundedColor="#000000"
+							imageWidth="64"
+							imageHeight="64"
+							roundedSize="5"
+						/>
+					</div>
+					<div className="HomeTotalLabel">
+						<img src={label} alt="label" width="120" />
+						<div class="text-centered">No. 1201</div>
+					</div>
+					<div className="HomeScore">
+						<Grid>
+							<Grid.Row columns={2}>
+								<Grid.Column>
+									<div className="HomeHardware CPU">
+										{/*css width 값 조절 필요*/}
+										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Red.value}}} />
+										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Orange.value}}} />
+										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Yellow.value}}} />
+										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Green.value}}} />
+										<Progress percent={88} theme={{active: {symbol: '40,000',color: palette.Blue.value}}} />
+									</div>
+								</Grid.Column>
+								<Grid.Column>
+									<div className="HomeHardware GPU">
+									</div>
+								</Grid.Column>
+							</Grid.Row>
+							<Grid.Row columns={2}>
+								<Grid.Column>
+									<div className="HomeHardware Drive"></div>
+								</Grid.Column>
+								<Grid.Column>
+									<div className="HomeHardware RAM"></div>
+								</Grid.Column>
+							</Grid.Row>
+						</Grid>
+					</div>
+				</div>
+				<div className="HomeBanner3">
+					
+					<div>
+						<Slider arrows={false} autoplay={true} dots={true}>
+							<div>
+								<h3>1</h3>
+							</div>
+							<div>
+								<h3>2</h3>
+							</div>
+							<div>
+								<h3>3</h3>
+							</div>
+							<div>
+								<h3>4</h3>
+							</div>
+						</Slider>
+					</div>
+				</div>
 			</div>
 		);
 	}

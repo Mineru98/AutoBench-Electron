@@ -1,0 +1,21 @@
+<svg width="120" height="20" xmlns="http://www.w3.org/2000/svg" style="vector-effect: non-scaling-stroke;" stroke="null">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g stroke="null">
+  <title stroke="null">background</title>
+  <rect stroke="null" fill="none" id="canvas_background" height="22" width="122" y="-1" x="-1"/>
+  <g style="vector-effect: non-scaling-stroke;" stroke="null" display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <path stroke="null" id="svg_5" d="m16.96873,-0.0774l-15.57745,18.68473l15.57745,-18.68473z" stroke-width="2.5" fill="#c5c766"/>
+  <path stroke="null" transform="rotate(-90 9.71601963043213,9.987863540649414) " id="svg_6" d="m19.764562,20.036406l0,-20.097086l-20.097085,20.097086l20.097085,0z" fill-opacity="null" stroke-opacity="null" stroke-width="2.5" fill="#c5c766"/>
+  <path stroke="null" id="svg_9" d="m19.95874,19.939323l0,-20.09709l-20.09709,20.09709l20.09709,0z" fill-opacity="null" stroke-opacity="null" stroke-width="2.5" fill="#c5c766"/>
+  <path stroke="null" id="svg_10" d="m90.269703,0.116775l-15.57745,18.68473l15.57745,-18.68473z" stroke-width="2.5" fill="#c5c766"/>
+  <path stroke="null" transform="rotate(-180 110.00729370117188,10.084952354431152) " id="svg_11" d="m120.055825,20.133497l0,-20.09709l-20.09708,20.09709l20.09708,0z" fill-opacity="null" stroke-opacity="null" stroke-width="2.5" fill="#c5c766"/>
+  <path transform="rotate(90 109.91019439697266,9.890774726867685) " stroke="null" id="svg_12" d="m119.95874,19.93932l0,-20.09709l-20.09709,20.09709l20.09709,0z" fill-opacity="null" stroke-opacity="null" stroke-width="2.5" fill="#c5c766"/>
+  <rect stroke="null" id="svg_13" height="20.092486" width="80.388344" y="-0.099769" x="19.854369" fill-opacity="null" stroke-opacity="null" stroke-width="2.5" fill="#c5c766"/>
+ </g>
+</svg>
