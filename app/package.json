@@ -24,7 +24,7 @@
     "clear": "rm -rf dist && rm -rf build",
     "test": "electron",
     "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron main.js\"",
-    "start:react": "react-scripts start",
+    "start:react": "export PORT=8080 && react-scripts start",
     "build": "react-scripts build",
     "build:osx": "electron-builder --mac",
     "build:linux": "yarn build:linux32 && yarn build:linux64",
