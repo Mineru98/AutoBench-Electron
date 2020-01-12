@@ -1,0 +1,99 @@
+BGA1023, HM70, Intel Core i5 Mobile, Core i7 Mobile, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1023, HM75, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1023, HM76, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1023, HM77, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1023, QM77, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core
+BGA1023, HM65, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1023, HM67, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1023, QM67, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core
+BGA1023, QS67, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1168, HM86, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron
+BGA1168, HM87, Dual-Core, Pentium Dual-Core Mobile
+BGA1168, QM87, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core
+BGA1288, HM55, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1288, HM57, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1288, PM55, Intel Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Pentium Dual-Core Mobile
+BGA1288, QM57, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Core i7 Mobile Extreme Edition, Mobile Celeron Dual-Core
+BGA1288, QS57, Intel Core i3 Mobile, Core i5 Mobile, Core i7 Mobile, Mobile Celeron Dual-Core, Pentium Dual-Core Mobile
+BGA1364, B85, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA1364, H81, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA1364, H87, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA1364, H97, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA1364, Q85, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA1364, Q87, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA1364, Z87, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA1364, Z97, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Pentium Dual-Core
+BGA441, US15WP, Intel Atom Z-
+BGA441, US15WPT, Intel Atom Z-
+BGA479, 945GMS, Intel Celeron M, Core 2 Duo Mobile, Core
+BGA479, 852GM, Intel Celeron M, Pentium M
+BGA479, 852GMV, Intel Celeron M, Pentium M
+BGA479, 855GME, Intel Celeron, Intel Celeron D, Celeron M, Core 2 Duo Mobile, Core Duo, Mobile Celeron, Mobile Pentium 4, Mobile Pentium 4-M, Pentium 4, Pentium M, Xeon
+BGA479, 855GM, Intel Celeron M, Pentium M
+BGA479, 910GML, Intel Celeron M
+BGA479, 915GM, Intel Celeron M
+BGA479, 915GME, Intel Celeron M, Pentium M
+BGA479, 915GMS, Intel Celeron M, Pentium M
+BGA479, 915PM, Intel Celeron M, Pentium M
+BGA479, E7320, Intel Celeron M, Pentium M
+BGA479, GM965, Intel Celeron M, Core 2 Duo Mobile, Core 2 Extreme Mobile
+BGA559, NM10, Intel Atom
+LGA 1150, B85, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, H81, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, H87, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, H97, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, Q85, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, Q87, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, Z87, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, Z97, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1150, C226, Intel Celeron Dual-Core, Core i3, Core i5, Pentium Dual-Core, Xeon
+LGA 1151, B150, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, B250, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, H110, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, H170, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, H270, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, Q150, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, Q170, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, Q250, IIntel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, Q270, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, Z170, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, Z270, Intel Celeron Dual-Core, Core i3, Core i5, Core i7, Mobile Celeron Dual-Core, Pentium Dual-Core
+LGA 1151, B360, Intel Core Core i3, Core i5, Core i7, Core i7 Mobile
+LGA 1151, H310, Intel Core Core i3, Core i5, Core i7, Core i7 Mobile
+LGA 1151, H370, Intel Core Core i3, Core i5, Core i7, Core i7 Mobile
+LGA 1151, Q370, Intel Core Core i3, Core i5, Core i7, Core i7 Mobile
+LGA 1151, Z370, Intel Core Core i3, Core i5, Core i7, Core i7 Mobile
+LGA 1151, Z390, Intel Core Core i3, Core i5, Core i7, Core i9, Core i7 Mobile
+LGA 1155, B65, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, B75, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, C202, Intel Xeon
+LGA 1155, C204, Intel Xeon
+LGA 1155, C206, Intel Celeron Dual-Core, Core i3, Pentium Dual-Core, Xeon
+LGA 1155, C216, Intel Core i3, Pentium Dual-Core, Xeon
+LGA 1155, H61, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, H67, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, H77, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core, Xeon
+LGA 1155, P67, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, Q65, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, Q67, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core, Xeon
+LGA 1155, Q75, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, Q77, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, Z68, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, Z75, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1155, Z77, Intel Celeron Dual-Core, Core i3/i5/i7, Pentium Dual-Core
+LGA 1156, 3400, Intel Xeon
+LGA 1156, 3420, Intel Celeron Dual-Core, Xeon
+LGA 1156, 3450, Intel Core i3, Core i5, Pentium Dual-Core, Xeon
+LGA 1156, H55, Intel Core Core i3, Core i5, Core i7, Pentium Dual-Core
+LGA 1156, H57, Intel Core Core i3, Core i5, Core i7, Pentium Dual-Core
+LGA 1156, P55, Intel Core Core i3, Core i5, Core i7, Pentium Dual-Core
+LGA 1156, Q57, Intel Core Core i3, Core i5, Core i7, Pentium Dual-Core
+LGA 1356, C602, Intel Xeon
+LGA 1356, C602J, Intel Xeon
+LGA 1356, C604, Intel Xeon
+LGA 1356, C606, Intel Xeon
+LGA 1356, C608, Intel Xeon
+LGA 1366, 3420, Intel Celeron Dual-Core, Xeon
+LGA 1366, 5500, Intel Xeon
+LGA 1366, 5520, Intel Xeon
+LGA 1366, X58, Intel Core i7, Intel Core i7 Extreme, Intel Core i7 Xeon
