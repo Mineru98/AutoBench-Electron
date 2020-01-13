@@ -1,9 +1,9 @@
 import Enum from 'enum';
 import React from 'react';
 import axios from 'axios';
-import { Grid, Header, Modal } from 'semantic-ui-react';
+import { Grid, Header, Modal, Statistic } from 'semantic-ui-react';
 import SearchInput, { createFilter } from 'react-search-input';
-import ExampleComponent from 'react-rounded-image';
+// import ExampleComponent from 'react-rounded-image';
 import Slider from 'infinite-react-carousel';
 import { Progress } from 'react-sweet-progress';
 
@@ -197,18 +197,18 @@ class Main extends React.Component {
 		let ram_filter = ram_data.filter(createFilter(this.state.searchTerm, RAM_KEYS_TO_FILTERS));
 
 		return (
-			<div className="Home">
-				<div className="HomeBanner1_1">
+			<div className="home frame">
+				<div className="home banner top _1">
 					<Grid>
 						<Grid.Row>
 							<Grid.Column width={2} />
-							<Grid.Column width={5} id="home_logo">
-								<img src={logo} className="App-logo" alt="logo" width="150" />
+							<Grid.Column width={5} id="home-logo">
+								<img src={logo} className="logo" alt="logo" width="150" />
 								<Header size="huge">AutoBench</Header>
 							</Grid.Column>
 							<Grid.Column width={2} />
 							<Grid.Column verticalAlign="middle" width={5}>
-								<div className="home_rounded">
+								<div className="home rounded">
 									<Grid>
 										<Grid.Row>
 											<Grid.Column width={3}>
@@ -226,14 +226,14 @@ class Main extends React.Component {
 							<Grid.Column width={2} />
 						</Grid.Row>
 
-						<Grid.Row className="home_searchbar_top">
+						<Grid.Row className="home searchbar top">
 							<Grid.Column width={2} />
 							<Grid.Column width={5}>
-								<div className="home_rounded">
+								<div className="home rounded">
 									<Grid>
 										<Grid.Row>
 											<Grid.Column width={3}>
-												<img id="home_icon" src={cpuImg} width="30" alt="cpu" />
+												<img src={cpuImg} width="30" alt="cpu" />
 											</Grid.Column>
 											<Grid.Column width={12}>
 												<Modal
@@ -242,7 +242,7 @@ class Main extends React.Component {
 													size="small"
 													open={open_cpu}
 													trigger={
-														<Header color="grey" id="home_text" as="h3" onClick={this.cpu_modal}>
+														<Header color="grey" id="home-text" as="h3" onClick={this.cpu_modal}>
 															{cpu_model_name}
 														</Header>
 													}
@@ -279,7 +279,7 @@ class Main extends React.Component {
 							</Grid.Column>
 							<Grid.Column width={2} />
 							<Grid.Column width={5}>
-								<div className="home_rounded">
+								<div className="home rounded">
 									<Grid>
 										<Grid.Row>
 											<Grid.Column width={3}>
@@ -330,10 +330,10 @@ class Main extends React.Component {
 							<Grid.Column width={2} />
 						</Grid.Row>
 
-						<Grid.Row className="home_searchbar_bottom">
+						<Grid.Row className="home searchbar bottom">
 							<Grid.Column width={2} />
 							<Grid.Column width={5}>
-								<div className="home_rounded">
+								<div className="home rounded">
 									<Grid>
 										<Grid.Row>
 											<Grid.Column width={3}>
@@ -383,7 +383,7 @@ class Main extends React.Component {
 							</Grid.Column>
 							<Grid.Column width={2} />
 							<Grid.Column width={5}>
-								<div className="home_rounded">
+								<div className="home rounded">
 									<Grid>
 										<Grid.Row>
 											<Grid.Column width={3}>
@@ -435,57 +435,50 @@ class Main extends React.Component {
 						</Grid.Row>
 					</Grid>
 				</div>
-				<div className="HomeBanner1_2" />
-				<div className="HomeBanner2">
-					<div className="HomeRank">
-						<img id="Crown" src={Crown1} alt="crown1" width="64" />
-						<ExampleComponent
-							image={MyPhoto}
-							roundedColor="#000000"
-							imageWidth="64"
-							imageHeight="64"
-							roundedSize="5"
-						/>
+				<div className="home banner top _2" />
+				<div className="home banner middle">
+					<div className="home rank">
+						<img id="crown" src={Crown1} alt="crown1" width="64" />
+						<img id="man" src={MyPhoto} alt="man" width="64"/>
 					</div>
-					<div className="HomeTotalLabel">
+					<div className="home label total">
 						<img src={label} alt="label" width="120" />
 						<div class="text-centered">No. 1201</div>
 					</div>
-					<div className="HomeScore">
+					<div className="home rank-space">
 						<Grid>
 							<Grid.Row columns={2}>
 								<Grid.Column>
-									<div className="HomeLabel">
+									<div className="home label">
 										<img src={label} alt="label" width="120" />
 										<div class="text-centered">No. 1201</div>
 									</div>
-									<div className="HomeHardware CPU">
-										{/*css width 값 조절 필요*/}
-										<div className="HomeProgressBarTop">
+									<div className="home hardware CPU">
+										<div className="home progress-bar top">
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={78}
 												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
@@ -494,36 +487,36 @@ class Main extends React.Component {
 									</div>
 								</Grid.Column>
 								<Grid.Column>
-									<div className="HomeLabel">
+									<div className="home label">
 										<img src={label} alt="label" width="120" />
 										<div class="text-centered">No. 1201</div>
 									</div>
-									<div className="HomeHardware GPU">
-										<div className="HomeProgressBarTop">
+									<div className="home hardware GPU">
+										<div className="home progress-bar top">
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Purple.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={78}
 												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
@@ -534,36 +527,36 @@ class Main extends React.Component {
 							</Grid.Row>
 							<Grid.Row columns={2}>
 								<Grid.Column>
-									<div className="HomeLabel">
+									<div className="home label">
 										<img src={label} alt="label" width="120" />
 										<div class="text-centered">No. 1201</div>
 									</div>
-									<div className="HomeHardware Drive">
-										<div className="HomeProgressBarTop">
+									<div className="home hardware Drive">
+										<div className="home progress-bar top">
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={78}
 												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Purple.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
@@ -572,36 +565,36 @@ class Main extends React.Component {
 									</div>
 								</Grid.Column>
 								<Grid.Column>
-									<div className="HomeLabel">
+									<div className="home label">
 										<img src={label} alt="label" width="120" />
 										<div class="text-centered">No. 1201</div>
 									</div>
-									<div className="HomeHardware RAM">
-										<div className="HomeProgressBarTop">
+									<div className="home hardware RAM">
+										<div className="home progress-bar top">
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={78}
 												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
 											/>
 										</div>
-										<div className="HomeProgressBar">
+										<div className="home progress-bar normal">
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
@@ -613,85 +606,91 @@ class Main extends React.Component {
 						</Grid>
 					</div>
 				</div>
-				<div className="HomeBanner3">
-					<Grid>
-						<Grid.Row columns={2}>
-							<Grid.Column>
-								<div className="HomeHardware">
-									<Slider arrows={false} autoplay={true} dots={true}>
-										<div>
-											<h3>1</h3>
-										</div>
-										<div>
-											<h3>2</h3>
-										</div>
-										<div>
-											<h3>3</h3>
-										</div>
-										<div>
-											<h3>4</h3>
-										</div>
-									</Slider>
-								</div>
-							</Grid.Column>
-							<Grid.Column>
-								<div className="HomeHardware">
-									<Slider arrows={false} autoplay={true} dots={true}>
-										<div>
-											<h3>1</h3>
-										</div>
-										<div>
-											<h3>2</h3>
-										</div>
-										<div>
-											<h3>3</h3>
-										</div>
-										<div>
-											<h3>4</h3>
-										</div>
-									</Slider>
-								</div>
-							</Grid.Column>
-						</Grid.Row>
-						<Grid.Row columns={2}>
-							<Grid.Column>
-								<div className="HomeHardware">
-									<Slider arrows={false} autoplay={true} dots={true}>
-										<div>
-											<h3>1</h3>
-										</div>
-										<div>
-											<h3>2</h3>
-										</div>
-										<div>
-											<h3>3</h3>
-										</div>
-										<div>
-											<h3>4</h3>
-										</div>
-									</Slider>
-								</div>
-							</Grid.Column>
-							<Grid.Column>
-								<div className="HomeHardware">
-									<Slider arrows={false} autoplay={true} dots={true}>
-										<div>
-											<h3>1</h3>
-										</div>
-										<div>
-											<h3>2</h3>
-										</div>
-										<div>
-											<h3>3</h3>
-										</div>
-										<div>
-											<h3>4</h3>
-										</div>
-									</Slider>
-								</div>
-							</Grid.Column>
-						</Grid.Row>
-					</Grid>
+				<div className="home banner bottom">
+					<Statistic size="tiny">
+						<Statistic.Value>Upgrade</Statistic.Value>
+						 <Statistic.Value>Recommendation</Statistic.Value>
+					</Statistic>
+					<div className="home rank-space">
+						<Grid>
+							<Grid.Row columns={2}>
+								<Grid.Column>
+									<div className="home recommendation-space">
+										<Slider arrows={false} autoplay={true} dots={true}>
+											<div className="home recommendation">
+												<h3>1</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>2</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>3</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>4</h3>
+											</div>
+										</Slider>
+									</div>
+								</Grid.Column>
+								<Grid.Column>
+									<div className="home recommendation-space">
+										<Slider arrows={false} autoplay={true} dots={true}>
+											<div className="home recommendation">
+												<h3>1</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>2</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>3</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>4</h3>
+											</div>
+										</Slider>
+									</div>
+								</Grid.Column>
+							</Grid.Row>
+							<Grid.Row columns={2}>
+								<Grid.Column>
+									<div className="home recommendation-space">
+										<Slider arrows={false} autoplay={true} dots={true}>
+											<div className="home recommendation">
+												<h3>1</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>2</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>3</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>4</h3>
+											</div>
+										</Slider>
+									</div>
+								</Grid.Column>
+								<Grid.Column>
+									<div className="home recommendation-space">
+										<Slider arrows={false} autoplay={true} dots={true}>
+											<div className="home recommendation">
+												<h3>1</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>2</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>3</h3>
+											</div>
+											<div className="home recommendation">
+												<h3>4</h3>
+											</div>
+										</Slider>
+									</div>
+								</Grid.Column>
+							</Grid.Row>
+						</Grid>
+					</div>
 				</div>
 			</div>
 		);

@@ -1,70 +1,23 @@
-.Home {
-	height: 2104px;
-	text-align: center;
+.home {
 	background-color: #ffffff;
 }
 
-.App-logo {
+.home.frame {
+	height: 2104px;
+	text-align: center;
+}
+
+.logo {
 	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 5s linear;
+	.logo {
+		animation: logo-spin infinite 5s linear;
 	}
 }
 
-.HomeBanner1_1 {
-	background-color: #e4e2e5;
-	height: 500px;
-	display: flex;
-	flex-direction: column;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.HomeBanner1_2 {
-	height: 164px;
-	display: flex;
-	background-color: #ffffff;
-	flex-direction: column;
-}
-
-.HomeBanner2 {
-	background-color: #d2d2d2;
-	height: 720px;
-}
-
-.HomeBanner3 {
-	background-color: #e2e2e2;
-	height: 720px;
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-.home_searchbar_top {
-	margin-bottom: 38px;
-}
-
-.home_searchbar_bottom {
-	margin-top: 38px;
-}
-
-.home_rounded {
-	padding-left: 25px;
-	padding-top: 25px;
-	background: #ffffff;
-	height: 80px;
-	width: 350px;
-	border-radius: 50px;
-	text-align: left;
-	box-shadow: 2px 2px 2px #858585;
-	overflow: hidden;
-}
-
-@keyframes App-logo-spin {
+@keyframes logo-spin {
 	from {
 		transform: rotate(0deg);
 	}
@@ -73,16 +26,60 @@
 	}
 }
 
-#home_input {
-	width: 230px;
+.home.banner {
+	height: 720px;
 }
 
-#home_text {
+.home.banner.top {
+	display: flex;
+	flex-direction: column;
+}
+
+.home.banner.top._1 {
+	background-color: #e4e2e5;
+	height: 500px;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.home.banner.top._2 {
+	height: 164px;
+}
+
+.home.banner.bottom {
+	padding-top: 50px;
+}
+
+.home.searchbar {
+	background-color: #e2e2e2;
+}
+
+.home.searchbar.top {
+	margin-bottom: 38px;
+}
+
+.home.searchbar.bottom {
+	margin-top: 38px;
+}
+
+.home.rounded {
+	padding-left: 25px;
+	padding-top: 25px;
+	height: 80px;
+	width: 350px;
+	border-radius: 50px;
+	text-align: left;
+	box-shadow: 2px 2px 2px #858585;
+	overflow: hidden;
+}
+
+
+#home-text {
 	cursor: pointer;
 	padding-top: 3.5px;
 }
 
-#home_logo {
+#home-logo {
 	padding: 0px 0px 0px 25px;
 }
 
@@ -134,40 +131,39 @@ td {
 	color: black;
 }
 
-.HomeRank {
+.home.rank {
 	height: 120px;
 	position: relative;
 	text-align: center;
 }
 
-.HomeScore {
-	margin: 50px 68px 50px 68px;
+.home.rank-space {
+	padding: 50px 68px 50px 68px;
 }
 
-.HomeHardware {
+.home.hardware {
 	height: 200px;
-	background-color: #ffffff;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 }
 
-.HomeProgressBar {
+.home.progress-bar.normal {
 	position: relative;
 	text-align: center;
 	padding: 8px 50px 8px 30px;
 }
 
-.HomeProgressBarTop {
+.home.progress-bar.top {
 	padding: 20px 50px 8px 30px;
 }
 
-#Crown {
+#crown {
 	position: absolute;
 	transform: translate(-50%, -50%);
 	top: 30px;
 	z-index: 2;
 }
-.sc-bZQynM.hBMPnB {
+#man {
 	position: absolute;
 	z-index: 1;
 	top: 80px;
@@ -175,19 +171,28 @@ td {
 	transform: translate(-50%, -50%);
 }
 
-.HomeTotalLabel {
+.home.label {
+	background-color:transparent;
 	position: relative;
   text-align: center;
   color: black;
-	font-weight: bold;
+	top: 13px;
 }
 
-.HomeLabel {
-	position: relative;
-  text-align: center;
-  color: black;
-	font-weight: bold;
-	top: 13px;
+.home.label.total {
+	top: 0px;
+}
+
+.home.recommendation-space {
+	height: 240px;
+	background-color: #ffffff;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+}
+
+.home.recommendation {
+	height: 190px;
+	border-radius: 10px;
 }
 
 .text-centered {
