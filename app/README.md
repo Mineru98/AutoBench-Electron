@@ -1,3 +1,8 @@
+## LoadMap
+- [ ] Total Rank
+- [ ] Recommendation Algorith
+- [ ] RAM Data
+
 ## How to Deploy [this](https://www.christianengvall.se/electron-packager-tutorial/)
 ```
 # Linux

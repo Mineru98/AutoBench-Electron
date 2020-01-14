@@ -7,7 +7,7 @@ import SearchInput, { createFilter } from 'react-search-input';
 import Slider from 'infinite-react-carousel';
 import { Progress } from 'react-sweet-progress';
 
-import ram_data from '../../assets/data/ram_data';
+import all_ram_data from '../../assets/data/ram_data';
 
 import logo from '../../assets/imgs/setting.svg';
 import label from '../../assets/imgs/label.svg';
@@ -33,6 +33,7 @@ const palette = new Enum({
 	Purple: '#753BBD'
 });
 
+
 class Main extends React.Component {
 	// linux & windows : hardwareinfo.index.js로 실행해서 최초 실행 시 model_name에 배치
 	constructor(props) {
@@ -43,16 +44,20 @@ class Main extends React.Component {
 			open_gpu: false,
 			open_ram: false,
 			open_drive: false,
-			cpu_model_name: 'CPU',
-			gpu_model_name: 'GPU',
+			cpu_model_name: 'Intel Core i5-9400F @ 2.90GHz',
+			gpu_model_name: 'GeForce GTX 1060',
 			ram_model_name: 'RAM',
-			drive_model_name: 'Drive',
-			mainboard_model_name: 'MainBoard',
+			drive_model_name: 'Samsung SSD 970 EVO Plus 500GB',
+			mainboard_model_name: 'Asus TUF B360-Plus Gaming',
+			all_cpu_data: [],
+			all_gpu_data: [],
+			all_drive_data: [],
+			all_ram_data: [],
 			cpu_data: [],
 			gpu_data: [],
 			drive_data: [],
 			ram_data: [],
-			mainboard: []
+			mainboard_data: []
 		};
 		this.searchUpdated = this.searchUpdated.bind(this);
 		this.onClickCPUModal = this.onClickCPUModal.bind(this);
@@ -71,7 +76,17 @@ class Main extends React.Component {
 			.get('http://autobenchserver-hywpy.run.goorm.io/cpu')
 			.then(data => {
 				this.setState({
-					cpu_data: data.data
+					all_cpu_data: data.data || []
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		axios
+			.get('http://autobenchserver-hywpy.run.goorm.io/cpu/' + this.state.cpu_model_name)
+			.then(data => {
+				this.setState({
+					cpu_data: data.data || []
 				});
 			})
 			.catch(error => {
@@ -81,7 +96,37 @@ class Main extends React.Component {
 			.get('http://autobenchserver-hywpy.run.goorm.io/gpu')
 			.then(data => {
 				this.setState({
-					gpu_data: data.data
+					all_gpu_data: data.data || []
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		axios
+			.get('http://autobenchserver-hywpy.run.goorm.io/gpu/' + this.state.gpu_model_name)
+			.then(data => {
+				this.setState({
+					gpu_data: data.data || []
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		axios
+			.get('http://autobenchserver-hywpy.run.goorm.io/ram')
+			.then(data => {
+				this.setState({
+					all_ram_data: data.data || []
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		axios
+			.get('http://autobenchserver-hywpy.run.goorm.io/ram/' + this.state.ram_model_name)
+			.then(data => {
+				this.setState({
+					ram_data: data.data || []
 				});
 			})
 			.catch(error => {
@@ -91,7 +136,27 @@ class Main extends React.Component {
 			.get('http://autobenchserver-hywpy.run.goorm.io/diskdrive')
 			.then(data => {
 				this.setState({
-					drive_data: data.data
+					all_drive_data: data.data || []
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		axios
+			.get('http://autobenchserver-hywpy.run.goorm.io/diskdrive/' + this.state.drive_model_name)
+			.then(data => {
+				this.setState({
+					drive_data: data.data || []
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		axios
+			.get('http://autobenchserver-hywpy.run.goorm.io/mainboard/' + this.state.mainboard_model_name)
+			.then(data => {
+				this.setState({
+					mainboard_data: data.data || []
 				});
 			})
 			.catch(error => {
@@ -104,11 +169,13 @@ class Main extends React.Component {
 	}
 
 	onClickCPUModal(e, model_name) {
-		this.setState({ open_cpu: false, cpu_model_name: model_name });
+		this.setState({ open_cpu: false, cpu_model_name: model_name, searchTerm: '' });
 		axios
 			.get('http://autobenchserver-hywpy.run.goorm.io/cpu/' + model_name)
 			.then(data => {
-				console.log(data.data);
+				this.setState({
+					cpu_data: data.data || []
+				});
 			})
 			.catch(error => {
 				console.log(error);
@@ -116,11 +183,13 @@ class Main extends React.Component {
 	}
 
 	onClickGPUModal(e, model_name) {
-		this.setState({ open_gpu: false, gpu_model_name: model_name });
+		this.setState({ open_gpu: false, gpu_model_name: model_name, searchTerm: '' });
 		axios
 			.get('http://autobenchserver-hywpy.run.goorm.io/gpu/' + model_name)
 			.then(data => {
-				console.log(data.data);
+				this.setState({
+					gpu_data: data.data || []
+				});
 			})
 			.catch(error => {
 				console.log(error);
@@ -128,11 +197,13 @@ class Main extends React.Component {
 	}
 
 	onClickRAMModal(e, model_name) {
-		this.setState({ open_ram: false, ram_model_name: model_name });
+		this.setState({ open_ram: false, ram_model_name: model_name, searchTerm: '' });
 		axios
 			.get('http://autobenchserver-hywpy.run.goorm.io/ram/' + model_name)
 			.then(data => {
-				console.log(data.data);
+				this.setState({
+					ram_data: data.data || []
+				});
 			})
 			.catch(error => {
 				console.log(error);
@@ -140,11 +211,13 @@ class Main extends React.Component {
 	}
 
 	onClickDriveModal(e, model_name) {
-		this.setState({ open_drive: false, drive_model_name: model_name });
+		this.setState({ open_drive: false, drive_model_name: model_name, searchTerm: '' });
 		axios
 			.get('http://autobenchserver-hywpy.run.goorm.io/diskdrive/' + model_name)
 			.then(data => {
-				console.log(data.data);
+				this.setState({
+					drive_data: data.data || []
+				});
 			})
 			.catch(error => {
 				console.log(error);
@@ -186,15 +259,19 @@ class Main extends React.Component {
 			ram_model_name,
 			drive_model_name,
 			mainboard_model_name,
+			all_cpu_data,
+			all_gpu_data,
+			all_drive_data,
 			cpu_data,
 			gpu_data,
-			drive_data
+			drive_data,
+			ram_data
 		} = this.state;
 
-		let cpu_filter = cpu_data.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
-		let gpu_filter = gpu_data.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
-		let drive_filter = drive_data.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
-		let ram_filter = ram_data.filter(createFilter(this.state.searchTerm, RAM_KEYS_TO_FILTERS));
+		let cpu_filter = all_cpu_data.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+		let gpu_filter = all_gpu_data.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+		let drive_filter = all_drive_data.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+		let ram_filter = all_ram_data.filter(createFilter(this.state.searchTerm, RAM_KEYS_TO_FILTERS));
 
 		return (
 			<div className="home frame">
@@ -215,7 +292,7 @@ class Main extends React.Component {
 												<img src={mainboardImg} width="30" alt="mainboard" />
 											</Grid.Column>
 											<Grid.Column width={12}>
-												<Header color="grey" id="home_text" as="h3">
+												<Header color="grey" id="home-text" as="h3">
 													{mainboard_model_name}
 												</Header>
 											</Grid.Column>
@@ -292,7 +369,7 @@ class Main extends React.Component {
 													size="small"
 													open={open_gpu}
 													trigger={
-														<Header color="grey" id="home_text" as="h3" onClick={this.gpu_modal}>
+														<Header color="grey" id="home-text" as="h3" onClick={this.gpu_modal}>
 															{gpu_model_name}
 														</Header>
 													}
@@ -346,7 +423,7 @@ class Main extends React.Component {
 													size="small"
 													open={open_drive}
 													trigger={
-														<Header color="grey" id="home_text" as="h3" onClick={this.drive_modal}>
+														<Header color="grey" id="home-text" as="h3" onClick={this.drive_modal}>
 															{drive_model_name}
 														</Header>
 													}
@@ -396,7 +473,7 @@ class Main extends React.Component {
 													onClose={this.ram_modal}
 													open={open_ram}
 													trigger={
-														<Header color="grey" id="home_text" as="h3" onClick={this.ram_modal}>
+														<Header color="grey" id="home-text" as="h3" onClick={this.ram_modal}>
 															{ram_model_name}
 														</Header>
 													}
@@ -439,11 +516,11 @@ class Main extends React.Component {
 				<div className="home banner middle">
 					<div className="home rank">
 						<img id="crown" src={Crown1} alt="crown1" width="64" />
-						<img id="man" src={MyPhoto} alt="man" width="64"/>
+						<img id="man" src={MyPhoto} alt="man" width="64" />
 					</div>
 					<div className="home label total">
 						<img src={label} alt="label" width="120" />
-						<div class="text-centered">No. 1201</div>
+						<div className="text-centered">No. 1201</div>
 					</div>
 					<div className="home rank-space">
 						<Grid>
@@ -451,34 +528,39 @@ class Main extends React.Component {
 								<Grid.Column>
 									<div className="home label">
 										<img src={label} alt="label" width="120" />
-										<div class="text-centered">No. 1201</div>
+										<div className="text-centered">No. {cpu_data.rank}</div>
 									</div>
 									<div className="home hardware CPU">
 										<div className="home progress-bar top">
+											<div className="progress-label top">Intel Core i5 9400F</div>
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">Intel Core i5 9400F</div>
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">{cpu_data.model_name}</div>
 											<Progress
 												percent={78}
-												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
+												theme={{ active: { symbol: cpu_data.score, color: palette.Yellow.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">Intel Core i5 9400F</div>
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">Intel Core i5 9400F</div>
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
@@ -489,34 +571,39 @@ class Main extends React.Component {
 								<Grid.Column>
 									<div className="home label">
 										<img src={label} alt="label" width="120" />
-										<div class="text-centered">No. 1201</div>
+										<div className="text-centered">No. {gpu_data.rank}</div>
 									</div>
 									<div className="home hardware GPU">
 										<div className="home progress-bar top">
+											<div className="progress-label top">GeForce GTX 1080</div>
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">GeForce GTX 1070</div>
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Purple.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">{gpu_data.model_name}</div>
 											<Progress
 												percent={78}
-												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
+												theme={{ active: { symbol: gpu_data.score, color: palette.Red.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">GeForce GTX 1050 ti</div>
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">GeForce GTX 1050</div>
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
@@ -529,34 +616,39 @@ class Main extends React.Component {
 								<Grid.Column>
 									<div className="home label">
 										<img src={label} alt="label" width="120" />
-										<div class="text-centered">No. 1201</div>
+										<div className="text-centered">No. {drive_data.rank}</div>
 									</div>
 									<div className="home hardware Drive">
 										<div className="home progress-bar top">
+											<div className="progress-label top">SAMSUNG EVO PRO 970</div>
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">SAMSUNG EVO PRO 970</div>
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">{drive_data.model_name}</div>
 											<Progress
 												percent={78}
-												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
+												theme={{ active: { symbol: drive_data.score, color: palette.Indigo.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">SAMSUNG EVO PRO 970</div>
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Purple.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">SAMSUNG EVO PRO 970</div>
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Red.value } }}
@@ -567,34 +659,39 @@ class Main extends React.Component {
 								<Grid.Column>
 									<div className="home label">
 										<img src={label} alt="label" width="120" />
-										<div class="text-centered">No. 1201</div>
+										<div className="text-centered">No. {ram_data.rank}</div>
 									</div>
 									<div className="home hardware RAM">
 										<div className="home progress-bar top">
+											<div className="progress-label top">SAMSUNG DDR4 8GB 2466GHz</div>
 											<Progress
 												percent={88}
 												theme={{ active: { symbol: '40,000', color: palette.Orange.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">SAMSUNG DDR4 8GB 2466GHz</div>
 											<Progress
 												percent={83}
 												theme={{ active: { symbol: '40,000', color: palette.Yellow.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">SAMSUNG DDR4 8GB 2466GHz</div>
 											<Progress
 												percent={78}
 												theme={{ active: { symbol: '40,000', color: palette.Green.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">SAMSUNG DDR4 8GB 2466GHz</div>
 											<Progress
 												percent={73}
 												theme={{ active: { symbol: '40,000', color: palette.Blue.value } }}
 											/>
 										</div>
 										<div className="home progress-bar normal">
+											<div className="progress-label">SAMSUNG DDR4 8GB 2466GHz</div>
 											<Progress
 												percent={68}
 												theme={{ active: { symbol: '40,000', color: palette.Indigo.value } }}
@@ -609,7 +706,7 @@ class Main extends React.Component {
 				<div className="home banner bottom">
 					<Statistic size="tiny">
 						<Statistic.Value>Upgrade</Statistic.Value>
-						 <Statistic.Value>Recommendation</Statistic.Value>
+						<Statistic.Value>Recommendation</Statistic.Value>
 					</Statistic>
 					<div className="home rank-space">
 						<Grid>
@@ -696,4 +793,6 @@ class Main extends React.Component {
 		);
 	}
 }
+
+
 export default Main;

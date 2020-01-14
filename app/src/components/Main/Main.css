@@ -147,14 +147,31 @@ td {
 	border-radius: 10px;
 }
 
-.home.progress-bar.normal {
+.home.progress-bar {
 	position: relative;
 	text-align: center;
+	z-index: 1;
+}
+
+.home.progress-bar.normal {
 	padding: 8px 50px 8px 30px;
 }
 
 .home.progress-bar.top {
 	padding: 20px 50px 8px 30px;
+}
+
+.progress-label {
+	width: 75%;
+	height: 20px;
+	position: absolute;
+  top: 8px;
+	z-index: 2;
+	overflow: auto;
+}
+
+.progress-label.top {
+  top: 20px;
 }
 
 #crown {
@@ -172,6 +189,7 @@ td {
 }
 
 .home.label {
+	z-index: 2;
 	background-color:transparent;
 	position: relative;
   text-align: center;
