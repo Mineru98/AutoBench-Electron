@@ -1,24 +1,38 @@
 import React from 'react';
-import { Grid, Header } from 'semantic-ui-react'
+import { Grid, Header, List } from 'semantic-ui-react';
 
 import './Card.css';
 
-export class Card extends React.Component {
+class Card extends React.Component {
 	render() {
-		const { imgUrl, modelName } = this.props;
 		return(
 			<div className="card recommendation">
 				<Grid>
-					<Grid.Colum width={5}>
-						<img src={imgUrl} className="card display" alt="display" width="150" />
-					</Grid.Colum>
-					<Grid.Colum width={9}>
-						<Header>{modelName}</Header>
-						<Header>{modelName}</Header>
-						<Header>{modelName}</Header>
-					</Grid.Colum>
+					<Grid.Column width={6}>
+						<img src={this.props.imgUrl} width="150" alt="reco" />
+					</Grid.Column>
+					<Grid.Column width={10}>
+						<List>
+							<List.Item>
+								<Header size='large'>
+									{this.props.title}
+								</Header>
+							</List.Item>
+							<List.Item>
+								<Header size='medium'>
+									{this.props.description}
+								</Header>
+							</List.Item>
+							<List.Item>
+								<Header size='medium'>
+									{this.props.description}
+								</Header>
+							</List.Item>
+						</List>
+					</Grid.Column>
 				</Grid>
 			</div>
 		);
 	}
 }
+export default Card;

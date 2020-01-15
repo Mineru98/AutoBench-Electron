@@ -1,7 +1,7 @@
 import Enum from 'enum';
 import React from 'react';
 import axios from 'axios';
-import { Grid, Header, Modal, Statistic } from 'semantic-ui-react';
+import { Grid, Header, Modal, Statistic, Image } from 'semantic-ui-react';
 import SearchInput, { createFilter } from 'react-search-input';
 // import ExampleComponent from 'react-rounded-image';
 import Slider from 'infinite-react-carousel';
@@ -19,6 +19,7 @@ import mainboardImg from '../../assets/imgs/mainboard.png';
 import MyPhoto from '../../assets/imgs/man.jpg';
 import Crown1 from '../../assets/imgs/crown1_icon.png';
 
+import Card from '../Card/Card';
 import './Main.css';
 
 const RAM_KEYS_TO_FILTERS = ['name', 'img'];
@@ -516,7 +517,7 @@ class Main extends React.Component {
 				<div className="home banner middle">
 					<div className="home rank">
 						<img id="crown" src={Crown1} alt="crown1" width="64" />
-						<img id="man" src={MyPhoto} alt="man" width="64" />
+						<Image id="man" src={MyPhoto} height="64" width="64" circular alt="man"/>
 					</div>
 					<div className="home label total">
 						<img src={label} alt="label" width="120" />
@@ -714,36 +715,20 @@ class Main extends React.Component {
 								<Grid.Column>
 									<div className="home recommendation-space">
 										<Slider arrows={false} autoplay={true} dots={true}>
-											<div className="home recommendation">
-												<h3>1</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>2</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>3</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>4</h3>
-											</div>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test1"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test2"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test3"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test4"/>
 										</Slider>
 									</div>
 								</Grid.Column>
 								<Grid.Column>
 									<div className="home recommendation-space">
 										<Slider arrows={false} autoplay={true} dots={true}>
-											<div className="home recommendation">
-												<h3>1</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>2</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>3</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>4</h3>
-											</div>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test1"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test2"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test3"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test4"/>
 										</Slider>
 									</div>
 								</Grid.Column>
@@ -752,36 +737,20 @@ class Main extends React.Component {
 								<Grid.Column>
 									<div className="home recommendation-space">
 										<Slider arrows={false} autoplay={true} dots={true}>
-											<div className="home recommendation">
-												<h3>1</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>2</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>3</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>4</h3>
-											</div>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test1"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test2"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test3"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test4"/>
 										</Slider>
 									</div>
 								</Grid.Column>
 								<Grid.Column>
 									<div className="home recommendation-space">
 										<Slider arrows={false} autoplay={true} dots={true}>
-											<div className="home recommendation">
-												<h3>1</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>2</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>3</h3>
-											</div>
-											<div className="home recommendation">
-												<h3>4</h3>
-											</div>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test1"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test2"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test3"/>
+											<Card imgUrl="http://autobench-web.run.goorm.io/imgs/intel_icon.png" title="Intel Core i5-9400F @ 2.90GHz" description="Test4"/>
 										</Slider>
 									</div>
 								</Grid.Column>
