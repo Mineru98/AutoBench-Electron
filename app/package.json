@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "chart.js": "^2.9.3",
+    "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
     "enum": "^2.5.0",
     "infinite-react-carousel": "^1.2.8",
@@ -22,13 +23,14 @@
     "semantic-ui-react": "^0.88.2",
     "sequelize": "^5.21.3",
     "sqlite": "^3.0.3",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^4.1.1",
+    "update-electron-app": "^1.5.0"
   },
   "scripts": {
     "clear": "rm -rf dist && rm -rf build",
     "test": "electron",
-    "start": "concurrently \"BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron main.js\"",
-    "start:react": "export PORT=8080 && react-scripts start",
+    "start": "concurrently \"cross-env BROWSER=none yarn start:react\" \"wait-on http://localhost:3000 && electron .\"",
+    "start:react": "react-scripts start",
     "build": "react-scripts build",
     "build:osx": "electron-builder --mac",
     "build:linux": "yarn build:linux32 && yarn build:linux64",
@@ -38,6 +40,7 @@
     "build:win32": "electron-builder --win --ia32",
     "build:win64": "electron-builder --win --x64"
   },
+  "main": "public/electron.js",
   "build": {
     "productName": "AutoBench",
     "appId": "com.mineru.autobench",
