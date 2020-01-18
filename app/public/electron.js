@@ -15,7 +15,7 @@ function createWindow() {
     width: 1080,
     height: 720,
     webPreferences: { nodeIntegration: true },
-    icon: path.join(__dirname, "assets/icon-128-nocolor.png")
+    icon: path.join(__dirname, "icon-128-nocolor.png")
   });
   mainWindow.setMenuBarVisibility(false);
   mainWindow.loadURL(
